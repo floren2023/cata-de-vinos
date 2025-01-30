@@ -25,10 +25,11 @@ function Contacto() {
           </p>
         </div>
 
-        <div className="sombra1 text-md italic text-red-900 tracking-tight bg-red-100 rounded-lg p-6 w-2/3 sm:col-span-1 md:col-span-1 lg:col-span-2 mx-auto justify-center">
+        <div className="sombra1 text-md italic text-red-900 tracking-tight bg-red-100 rounded-lg p-6 w-2/3 
+        sm:col-span-1 md:col-span-1 lg:col-span-2 mx-auto justify-center">
           ¡Nos encantaría saber de ti! Ya sea que tengas una pregunta,
           comentario o simplemente quieras decir hola, no dudes en comunicarte a
-          través de cualquiera de los métodos que encontrarás a continuación."
+          través de cualquiera de los métodos que encontrarás a continuación.
           <div className="text-md font-bold mt-3 text-center ">
             Mandanos un correo:
             <form className="max-w-md mx-auto">
