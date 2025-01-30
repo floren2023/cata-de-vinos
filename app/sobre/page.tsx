@@ -23,7 +23,7 @@ const responsive = {
   }
 };
 
-export default function(){
+export default function Sobre(){
     return(
     
         <div className="bg-gradient-to-b from-red-200 to-gray-100 mt-20 text-md ml-10 mr-10 pb-10">
@@ -37,13 +37,13 @@ export default function(){
  
  <div className=" grid sm:grid-cols-1 lg:grid-cols-2  rounded-md text-center  ">
  
-  <div className="  font2 font-semibold text-center  text-xl text-wrap 
+  <div className="  font2  text-center  text-xl text-wrap 
     text-md text-gray-700  overflow-scroll
        pr-10 pl-10">
-      <div className="text-red-800 text-xl italic pt-20 pb-10 justify-center text-center ">
+      <div className="text-red-800 text-xl italic pt-20 pb-10 justify-center text-center font-semibold ">
         Apasionados por descubrir el mejor vino...
        </div>
-       <div className="pl-20 pr-10">
+       <div className="pl-20 pr-10 font-medium text-md">
    Somos una familia que pensamos en 
     ofrecer felicidad a otras familias con los productos y regalos que nuestra empresa tiene
 <p>Somos una tienda en Castellon....</p> 

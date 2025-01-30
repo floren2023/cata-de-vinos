@@ -37,7 +37,7 @@ export default function Footer() {
                 <p className="pb-1 pl-3">Domingo y Lunes cerrado</p>
               </li>
               <li className="mb-4 text-red-800">
-                <Link href="\contact" className="hover:underline underline">
+                <Link href="\contacto" className="hover:underline underline">
                   Contactanos
                 </Link>
               </li>

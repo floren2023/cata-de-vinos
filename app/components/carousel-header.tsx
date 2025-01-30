@@ -1,7 +1,4 @@
 "use client"
-import Image from 'next/image'
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
@@ -29,19 +26,21 @@ export default function CarouselHeader(){
         >
             {data.map((item,id)=>{
                 return(
+                    <div key={id} className='h-[400px]'>
+                         <div  className='rounded-b-md'> 
+                     <p className="bg-gray-200 rounded-t-md pt-3 pb-3 opacity-75 text-xl text-red-800">{item.title}</p>
+                                 
                     
-                <div key={id} className='rounded-md'>
-                    
-                    
-                <img src={item.image} alt={item.title} className='rounded-md'/>
-                <p className="legend">{item.title}</p>
+                <img src={item.image} alt={item.title} className='rounded-b-md '/>
+                
                 
             </div>
-            
+           
+            </div>
                 )
             })}
         
-           
+        
     </Carousel>
     
     )

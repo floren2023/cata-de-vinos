@@ -5,7 +5,7 @@ export default function Header(){
     return(
         <>
         
-  <div className=" grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-5 ">
+  <div className=" grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 pt-5 mt-10 pl-10 pr-10 ">
     <div className="pt-10 flex flex-col gap-5">
     <div className="bg-gray-100 justify-center text-red-900 text-2xl   tracking-wider 
     pt-20 text-center font-[merienda]">
@@ -16,7 +16,7 @@ CATAS A LA CARTA Y MARIDAJES
 <p>Somos expecialistas en servicios de degustación</p>
 
  </div>
-<div className="text-xl  pt-5 text-red-700 tracking-wide justify-center text-center pl-10 merienda-h3 ">
+<div className="text-xl  pt-5 text-red-700 tracking-wide justify-center text-center pl-10 font-[merienda] ">
   Degustación de vinos de colección e internacionales
     
         </div>
@@ -30,17 +30,18 @@ CATAS A LA CARTA Y MARIDAJES
         </div>
       </div>
       
-     <div className="pt-5 items-center m-auto" > 
+     <div className="pt-5 items-center mr-10 " > 
   <CarouselHeader/>
        </div>
+       
 </div>
 
 <div className="flex flex-col  ">
-  <div className="pl-20 text-gray-600 merienda-h3 text-md tracking-wider pt-10">
+  <div className="pl-20 text-gray-600 font-[merienda] text-md tracking-wider ">
     Nuestros socios
   </div>
  
-  <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-center pt-8 pb-8 pl-10 pr-10 mx-auto">
+  <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-center  pb-8 pl-10 pr-10 mx-auto">
     <div className="justify-center content-center items-center mx-auto">
     <img src="/logos/freixenet.png" alt="logo freixenet" className="h-20  " />
   </div>

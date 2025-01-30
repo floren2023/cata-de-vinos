@@ -17,10 +17,10 @@ return(
     className="max-w-screen-7xl flex flex-row items-center justify-between
      mx-auto gap-20"
   >
-    <div className="w-2/3 ">
+    <div className="w-2/3 pl-10 m-auto">
      <Link href="/" className= "text-red-800">
       <Image
-        src='/logos/cata2.png' width={160} height={100}
+        src='/logos/cata2.png' width={165} height={100}
         className=" sm:w-30  md:w-1/2 md:h-1/2 lg:w-[160] lg:h-[100]  justify-start content-center ietms-center"
         alt="logo"
       />
@@ -68,8 +68,8 @@ return(
     </div>
    
     
-    <div className="flex md:order-2">
-      <button
+   <div className="flex md:order-2">
+       <button
         type="button"
         data-collapse-toggle="navbar-search"
         aria-controls="navbar-search"
@@ -98,20 +98,20 @@ return(
 
           <div className="flex flex-inline gap-4">
             <div>
-              <Link href="/tienda" className="block">
+             {/*  <Link href="/tienda" className="block">
                 <Search
                   className="text-red-900 w-6 h-6"
                 />
                 <span className="sr-only">Buscar </span>
-              </Link>
+              </Link> */}
             </div>
             <ul
-              className="flex flex-inline gap-6 content-center items-center justify-end"
+              className="flex flex-inline gap-6 content-center items-center justify-end pr-20 pb-3"
             >
               
-                {/* <li className="text-red-900 hover:text-red-900 font-medium">
+                 <li className="text-red-900 hover:text-red-900 font-medium">
             <Link href="/admin/dashboard">Admin</Link>
-          </li>  */}
+          </li>  
           <li className="text-red-900 hover:text-red-900 font-medium">
             <Link href="/">Registrar</Link>
           </li>
@@ -126,7 +126,7 @@ return(
             >
               Login
           </Link>
-          </li>
+          
             {/*   <!-- no aparece en este navbar --> */}
               {/*  <li>
               <form id="logout" name="logout">
@@ -138,8 +138,8 @@ return(
                 type="submit"
               >
                 Logout
-              </button></form> 
-            </li> */}
+              </button></form> */}
+            </li> 
               <li>
                 <LuShoppingBasket
                   className="text-red-900 h-6 w-6"
@@ -159,12 +159,12 @@ return(
         <span className="sr-only">Abre menu</span>
         <AlignJustify />
       </button>
-    </div>
+    </div> 
     <div
       className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
       id="navbar-search"
     >
-      <div className="relative mt-3 md:hidden">
+      {/* <div className="relative mt-3 md:hidden">
         <div
           className="sm:hidden absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
         >
@@ -177,7 +177,7 @@ return(
           placeholder="Buscar en nuestro catalogo..."
         />
       </div>
-
+ */}
       
     </div>
   </div>
