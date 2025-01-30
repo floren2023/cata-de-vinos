@@ -20,7 +20,7 @@ return(
     <div className="w-2/3 pl-10 m-auto">
      <Link href="/" className= "text-red-800">
       <Image
-        src='/logos/cata2.png' width={165} height={100}
+        src='/logos/cata2.png' width={200} height={100}
         className=" sm:w-30  md:w-1/2 md:h-1/2 lg:w-[160] lg:h-[100]  justify-start content-center ietms-center"
         alt="logo"
       />

@@ -1,21 +1,22 @@
 
-import { pgEnum, pgTable,uniqueIndex,varchar } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable,uniqueIndex,varchar,serial,timestamp } from "drizzle-orm/pg-core";
 
 export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
 
 export const userTable = pgTable(
   "users",
   {
-    id: varchar('id',{length:256}).primaryKey(),
-    name: varchar('name',{length:256}),
-   
-    email:varchar('name',{length:256}),
+    id: serial('id').primaryKey(),
+    name: varchar('name',{length:256}).notNull(),    
+    email:varchar('email',{length:256}).notNull(),
+    password:varchar('password',{length:256}),
     // invitee: t.integer().references((): AnyPgColumn => users.id),
+    createdAt:timestamp('createdAt').defaultNow(),
     role: rolesEnum().default("guest"),
   },
-  (table) => {
+  (users) => {
     return {
-      emailIndex: uniqueIndex("users_email_idx").on(table.email),
+      emailIndex: uniqueIndex("users_email_idx").on(users.email),
     };
   }
   
@@ -25,3 +26,4 @@ export const userTable = pgTable(
 export const schema={
     user:userTable
 };
+
