@@ -5,6 +5,20 @@
 
 
 
+.merienda {
+  font-family: "Merienda", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+.bitter {
+  font-family: "Bitter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 .sombra3 {
   box-shadow:
     rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,

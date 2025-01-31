@@ -11,23 +11,23 @@ export function Navigation(){
   const pathname=usePathname();
 return(
 <nav
-  className="bg-white dark:bg-gray-900 fixed w-full top-0 start-0 pb-2 z-50 sombra3 pl-10 pr-10"
+  className="bg-white dark:bg-gray-900 fixed w-full top-0 start-0 pb-2 z-50 sombra3 pl-10 pr-10 bitter"
 >
   <div
     className="max-w-screen-7xl flex flex-row items-center justify-between
-     mx-auto gap-20"
+     mx-auto gap-10"
   >
     <div className="w-2/3 pl-10 m-auto">
      <Link href="/" className= "text-red-800">
       <Image
-        src='/logos/cata2.png' width={200} height={100}
-        className=" sm:w-30  md:w-1/2 md:h-1/2 lg:w-[160] lg:h-[100]  justify-start content-center ietms-center"
+        src='/logos/cata2.png' width={240} height={100}
+        className=" sm:w-30  md:w-1/2 md:h-1/2  lg:h-[100]  justify-start content-center ietms-center"
         alt="logo"
       />
     </Link></div>
     <div className="w-full">
     <ul
-        className=" w-full flex flex-inline sm:hidden md:flex   gap-6 font-[merienda]"
+        className=" w-full flex flex-inline sm:hidden md:flex trecking-wider  gap-6 font-[merienda]"
       >
         <li>
           <Link

@@ -15,6 +15,20 @@
       "when": 1738274632293,
       "tag": "0001_gigantic_rocket_racer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738347821589,
+      "tag": "0002_empty_argent",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1738351742139,
+      "tag": "0003_lively_silver_surfer",
+      "breakpoints": true
     }
   ]
 }
