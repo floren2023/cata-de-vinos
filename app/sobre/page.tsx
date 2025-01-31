@@ -26,7 +26,7 @@ const responsive = {
 export default function Sobre(){
     return(
     
-        <div className="bg-gradient-to-b from-red-200 to-gray-100 mt-20 text-md ml-10 mr-10 pb-10">
+        <div className="bg-gradient-to-b from-slate-100 via-red-100 to-gray-200 mt-20 text-md ml-10 mr-10 pb-10 pt-5">
    
    
     <div className="font-[merienda] text-md text-red-800 pl-40 mt-20 pt-10">VEN A CONOCER NUESTRA TIENDA</div>
@@ -50,8 +50,8 @@ export default function Sobre(){
 </div>
  </div>
 
-<div  className="rounded-lg pt-6 pb-6 justify-center mx-auto">
-  <Image src="/images/tienda1.jpg" alt="tienda" width={500} height={400} />
+<div  className="rounded-md pt-6 pb-6 justify-center mx-auto">
+  <Image src="/images/tienda1.jpg" alt="tienda" width={500} height={400} className="rounded-md"/>
 </div>
       </div>
 <div className="pr-10 pl-10 pt-6 pb-6  ">

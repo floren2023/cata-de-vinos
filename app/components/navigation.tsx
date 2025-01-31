@@ -20,47 +20,47 @@ return(
     <div className="w-2/3 pl-10 m-auto">
      <Link href="/" className= "text-red-800">
       <Image
-        src='/logos/cata2.png' width={240} height={100}
-        className=" sm:w-30  md:w-1/2 md:h-1/2  lg:h-[100]  justify-start content-center ietms-center"
+        src='/logos/cata2.png' width={234} height={100}
+        className=" sm:w-30  md:w-1/2 md:h-1/2  lg:w-[234px] lg:h-[100px]  justify-start content-center ietms-center"
         alt="logo"
       />
     </Link></div>
     <div className="w-full">
     <ul
-        className=" w-full flex flex-inline sm:hidden md:flex trecking-wider  gap-6 font-[merienda]"
+        className=" w-full flex flex-inline sm:hidden md:flex trecking-wider  gap-6 font-[merienda] font-medium"
       >
         <li>
           <Link
             href="/"
-            className={ pathname==="/" ?"text-sm uppercase  text-red-800 ":"text-gray-700 text-sm  uppercase hover:text-red-800"}
+            className={ pathname==="/" ?"text-sm uppercase  text-red-800 ":"text-gray-900 text-sm  uppercase hover:text-red-800"}
             >Inicio</Link>
           
         </li>
         <li>
           <Link
             href="/blog"
-            className={ pathname==="/blog" ?"text-sm uppercase  text-red-800 ":"text-gray-700 text-sm uppercase hover:text-red-800"}
+            className={ pathname==="/blog" ?"text-sm uppercase  text-red-800 ":"text-gray-900 text-sm uppercase hover:text-red-800"}
             >Blog</Link>
           
         </li>
         <li>
           <Link
             href="/sobre"
-            className={ pathname==="/sobre" ?" text-sm uppercase  text-red-800 ":"text-gray-700 text-sm uppercase hover:text-red-800"}
+            className={ pathname==="/sobre" ?" text-sm uppercase  text-red-800 ":"text-gray-900 text-sm uppercase hover:text-red-800"}
             >Sobre Nosostros</Link>
           
         </li>
         <li>
           <Link
             href="/servicios"
-            className={ pathname==="/servicios" ?"text-sm uppercase  text-red-800 ":"text-gray-700 text-sm  uppercase hover:text-red-800"}
+            className={ pathname==="/servicios" ?"text-sm uppercase  text-red-800 ":"text-gray-900 text-sm  uppercase hover:text-red-800"}
           >Servicios</Link>
         </li>
 
         <li>
           <Link
             href="/productos"
-            className={ pathname==="/productos" ?"text-sm uppercase  text-red-800 ":"text-gray-700  text-sm  uppercase hover:text-red-800"}
+            className={ pathname==="/productos" ?"text-sm uppercase  text-red-800 ":"text-gray-900  text-sm  uppercase hover:text-red-800"}
           > Productos</Link>
           
         </li>

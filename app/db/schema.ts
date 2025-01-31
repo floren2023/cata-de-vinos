@@ -113,7 +113,7 @@ export const favoriteTableEvents = pgTable("favorite_events", {
     eventIdx: index("event_idx").on(table.eventId),
   }}
 );
-export const favorite_eventsRelations = relations(favoriteTableEvents, ({ one, many }) => ({
+export const favorite_eventsRelations = relations(favoriteTableEvents, ({ one }) => ({
   userTable: one(userTable, {
     fields: [favoriteTableEvents.userId],
     references: [userTable.id],
@@ -138,7 +138,7 @@ export const favoriteTableProducts = pgTable("favorite_products", {
     productIdx: index("product_idx").on(table.productId),
   }});
 
-export const favorite_productsRelations = relations(favoriteTableProducts, ({ one, many }) => ({
+export const favorite_productsRelations = relations(favoriteTableProducts, ({ one }) => ({
   userTable: one(userTable, {
     fields: [favoriteTableProducts.userId],
     references: [userTable.id],
@@ -163,7 +163,7 @@ export const rezerveTable = pgTable("rezerve", {
   }}
 ); 
 
-export const rezerveTableRelations = relations(rezerveTable, ({ one, many }) => ({
+export const rezerveTableRelations = relations(rezerveTable, ({ one }) => ({
   userTable: one(userTable, {
     fields: [rezerveTable.userId],
     references: [userTable.id],
