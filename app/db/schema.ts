@@ -39,7 +39,7 @@ export const usersRelations = relations(userTable, ({ many }) => ({
 
 export const categoryTable = pgTable("category", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
+  name: text("name").notNull().unique(),
 },
 (table) => {
   return {

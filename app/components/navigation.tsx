@@ -52,15 +52,15 @@ return(
         </li>
         <li>
           <Link
-            href="/servicios"
-            className={ pathname==="/servicios" ?"text-sm uppercase  text-red-800 ":"text-gray-900 text-sm  uppercase hover:text-red-800"}
+            href="/events"
+            className={ pathname==="/events" ?"text-sm uppercase  text-red-800 ":"text-gray-900 text-sm  uppercase hover:text-red-800"}
           >Servicios</Link>
         </li>
 
         <li>
           <Link
-            href="/productos"
-            className={ pathname==="/productos" ?"text-sm uppercase  text-red-800 ":"text-gray-900  text-sm  uppercase hover:text-red-800"}
+            href="/products"
+            className={ pathname==="/products" ?"text-sm uppercase  text-red-800 ":"text-gray-900  text-sm  uppercase hover:text-red-800"}
           > Productos</Link>
           
         </li>
@@ -110,7 +110,7 @@ return(
             >
               
                  <li className="text-red-900 hover:text-red-900 font-medium">
-            <Link href="/admin/dashboard">Admin</Link>
+            <Link href="/users/">Admin</Link>
           </li>  
           <li className="text-red-900 hover:text-red-900 font-medium">
             <Link href="/">Registrar</Link>

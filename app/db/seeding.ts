@@ -1,18 +1,20 @@
 
 import {db} from './drizzle'
-import { userTable } from "./schema";
+import { categoryTable, userTable } from "./schema";
 
 async function main() {
   
-  await db
-    .insert(userTable)
+  const category= await db
+    .insert(categoryTable)
     .values({
-      name: "John Doe",
-      email: "John@mail.com",
-      password: "123456",
-      role: "guest",
+      name: "Vino tinto",
+      
     })
-    .returning();
+    .returning(); 
+    const categories=await db.select().from(categoryTable)
+    console.log(categories)
 }
 
-main();
+main (
+  
+);
