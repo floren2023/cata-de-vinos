@@ -1,0 +1,26 @@
+.wrap-principal {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+    background: url("../../public/images/events/cata1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .wrap-texto {
+    color: white;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .merienda-h3 {
+    font-family: "Merienda", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .font {
+    font-family: "Lato";
+  }

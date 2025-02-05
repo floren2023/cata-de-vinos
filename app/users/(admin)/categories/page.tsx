@@ -1,26 +1,21 @@
-//accces at client categoryForm
-import React from "react";
+"use server"
 
 import { getCategories } from "@/app/actions/category-actions";
-import { category } from "@/app/types/all-types";
+import { category } from "../../../types/all-types";
+import CategoryForm from "./categoryForm copy";
 
 
+export default async function Categories(){
+    type categories=category[]
+    
 
-type categories=category[]
- 
+    const categories=await getCategories()
 
-async function Categories() {
-  const categories=await getCategories()
-  
-  
-
-
-  return (
-   <div>
-     
-   </div>
-  )
- 
+    return(
+        <div>
+           
+            <CategoryForm categories={categories}/>
+            
+        </div>
+    )
 }
-
-export default Categories;

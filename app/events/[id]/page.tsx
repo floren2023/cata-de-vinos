@@ -1,4 +1,4 @@
-export default async function Product({params}:{params:{id:string}} ){
+export default async function Events({params}:{params:{id:string}} ){
     const {id} =await params;
-    return <div>Product  {id}</div>
+    return <div>Events  {id}</div>
 }

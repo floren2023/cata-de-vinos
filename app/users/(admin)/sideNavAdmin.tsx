@@ -1,6 +1,6 @@
 
 
-import {  usePathname, useRouter } from 'next/navigation'
+
 import { MdDashboard,MdCategory,MdEmojiEvents, MdFavorite } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
 import { FaBlog, FaCalendarCheck, FaComment, FaProductHunt } from "react-icons/fa";

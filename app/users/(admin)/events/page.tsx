@@ -1,13 +1,19 @@
-import React from 'react'
+"use server";
+
+import { getEvents } from "@/app/actions/events-actions";
+import { event } from "@/app/types/all-types";
+import EventsForm from "./eventsForm";
 
 
+export default async function Events() {
+  type events =event[];
 
-function Events() {
-  
+  const events = await getEvents();
 
-    return (
-        <div>blog</div>
-    )
+  return (
+    <div>
+      <div className="text-2xl mt-10 pl-40">Servicios</div>
+      <EventsForm events={events}/>
+    </div>
+  );
 }
-
-export default Events

@@ -57,9 +57,9 @@ export const eventTable= pgTable("event", {
   id:serial('id').primaryKey(),
   title: text('title').notNull(),
   description: text('description').notNull(),
-  image: text('image'),     
-  dateEv:timestamp('dateEv').defaultNow(),
-  dateAt:timestamp('dateAt').defaultNow() //publishing date
+  image: text('image').notNull(),     
+  dateEv:text('dateEv').notNull(),
+  dateAt:text('dateAt').notNull() //publishing date
 },
 (table) => {
   return {
