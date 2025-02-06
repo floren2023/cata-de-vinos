@@ -1,39 +1,55 @@
 "use server"
 
-import { addEvent } from "@/app/actions/events-actions"
+import { addProduct } from "@/app/actions/products-action"
+
+
 
 export type FormState={
     message:string
 }
+type Product={    
+    name:string,
+    description:string,
+    image:string,
+    price:number,
+    instock:boolean,
+    categoryId:number
+}
+export default async function formSubmit(data:FormData):Promise<FormState>{  
+    
+    const formData=Object.fromEntries(data)
+    const name=formData.name.toString()
+    const description=formData.description.toString()
+    const image=formData.image.toString()
+    const price=parseFloat(formData.price.toString())
+    const instock=(formData.instock.toString()==="true")? true:false
+    const categoryId=parseInt(formData.categoryId.toString())
 
-export default async function formSubmit(data:FormData):Promise<FormState>{   
-
-     const title=data.get("title")
-     const description=data.get("description")
-     const image=data.get("image")
-     const dateEv=data.get("dateEv")
-const dateAt=(new Date()).toString()
-    if(!title||!description||!image){
+    
+    
+    if(!name||!description||!image||!price){
         
         return{
-            message:"Invalid form data"
+            message:"Formulario invalido!"
         }
         
     }
     else{
-        const newEvent=      
-        {
-            title:title.toString(),
-            description:description.toString(),
-            image:image.toString(),
-            dateEv:dateEv.toString(),
-            dateAt:dateAt
-        }
+       const product:Product={
+         name:name,
+         description:description,
+         image:image,
+         price:price,
+         instock:instock,
+         categoryId:categoryId
+
+       }
+        
          
-       addEvent(newEvent)
+     addProduct(product)
 
         return{
-            message:"Evento creado con exito! "
+            message:"Producto creado con exito! "
         }}
 
 

@@ -1,4 +1,5 @@
 import { relations } from "drizzle-orm";
+
 import {
   pgEnum,
   pgTable,
@@ -8,8 +9,10 @@ import {
   timestamp,
   integer,  
   boolean,
-  numeric,
+  
+  real,
   index,
+  date,
 } from "drizzle-orm/pg-core";
 
 export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
@@ -58,8 +61,8 @@ export const eventTable= pgTable("event", {
   title: text('title').notNull(),
   description: text('description').notNull(),
   image: text('image').notNull(),     
-  dateEv:text('dateEv').notNull(),
-  dateAt:text('dateAt').notNull() //publishing date
+  dateEv:date('dateEv').notNull(),
+  dateAt:date('dateAt').notNull() //publishing date
 },
 (table) => {
   return {
@@ -77,9 +80,9 @@ export const productTable = pgTable("product", {
   name: text('name').notNull(),
   description: text('description').notNull(),
   image:text('image').notNull() , 
-  price: numeric('price').notNull(),
+  price: real('price').notNull(),
   instock: boolean().default(true),  
-  categoryId:integer("categoryId").references(()=>categoryTable.id)  
+  categoryId:integer("categoryId").references(()=>categoryTable.id).notNull()  
 },
 (table) => {
   return {

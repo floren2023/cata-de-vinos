@@ -26,6 +26,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { event } from "@/app/types/all-types";
 import formSubmit from "./formSubmit";
 import TableEventos from "./TableEventos";
+import { useToast } from "@/hooks/use-toast";
+import { GridEvent } from "./gridEvent";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -55,17 +57,20 @@ export default function EventsForm({ events }: { events: events }) {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    // const { toast } = useToast()
     const formData = new FormData();
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("image", values.image);
     formData.append("dateEv", values.dateEv.toISOString());
     let message = await formSubmit(formData);
-    alert(message.message);
-
-    if (message.message === "Event ha sido creado") {
+   alert(message.message);
+   /*  const crear=message.message
+    toast({
+     title: "Crea evento:",
+     description: crear,
+   }) */
+    if (message.message === "Evento creado con exito!") {
       events.push({
         id: events.length + 1,
         title: values.title.toString(),
@@ -193,7 +198,7 @@ export default function EventsForm({ events }: { events: events }) {
         </Card>
       </div>
       <div className="col-span-2">
-         <TableEventos events={events} /> 
+         <GridEvent events={events} /> 
     </div> 
       </div>
     

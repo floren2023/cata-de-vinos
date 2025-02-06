@@ -16,7 +16,7 @@ const dateAt=(new Date()).toString()
     if(!title||!description||!image){
         
         return{
-            message:"Invalid form data"
+            message:"Formulario invalido"
         }
         
     }
@@ -33,7 +33,7 @@ const dateAt=(new Date()).toString()
        addEvent(newEvent)
 
         return{
-            message:"Evento creado con exito! "
+            message:"Evento creado con exito!"
         }}
 
 

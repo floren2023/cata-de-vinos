@@ -84,7 +84,7 @@ export default  function TableEventos({events}:{events:events}) {
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    <img src="/images/sobre3.jpg" width={120} height={80}/>
+                    <img src={item.image} width={120} height={80}/>
                   </th>
                   <th
                     scope="row"

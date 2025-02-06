@@ -3,7 +3,7 @@ import { Bitter,Merienda } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "./components/navigation";
 import Footer from "./components/footer";
-
+import { Toaster } from "@/components/ui/toaster"
 
 
 export const metadata: Metadata = {
@@ -25,6 +25,7 @@ export default function RootLayout({
         className={`${bitter.variable} ${merienda.variable} antialiased`}
       >
         <Navigation/>
+        <Toaster/>
         {children}
         <Footer/>
       </body>

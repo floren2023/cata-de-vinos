@@ -20,6 +20,7 @@ import formSubmit from "./formSubmit"
 
 import TableCategories from "./TableCategories"
 import { category } from "@/app/types/all-types"
+import { useToast } from "@/hooks/use-toast"
 
 
 
@@ -31,7 +32,7 @@ const formSchema = z.object({
 
 type categories=category[]
 export default function CategoryForm({categories}:{categories:categories}) {
-  // ...
+  // const { toast } = useToast()
  // 1. Define your form.
  const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
@@ -43,13 +44,16 @@ export default function CategoryForm({categories}:{categories:categories}) {
 // 2. Define a submit handler.
 async function onSubmit(values: z.infer<typeof formSchema>) {
 
-  // Do something with the form values.
-  // ✅ This will be type-safe and validated.
+  
  const formData=new FormData()
  formData.append("name",values.name)
  let message=await formSubmit(formData)
   alert(message.message)
-
+ /* const crear=message.message
+ toast({
+  title: "Crea categoria:",
+  description: crear,
+}) */
   if(message.message==="Category created"){
             categories.push({id:categories.length+1, name:values.name.toString()})
             form.resetField('name')

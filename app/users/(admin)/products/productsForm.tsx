@@ -3,8 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
+import { Textarea } from "flowbite-react";
+import formSubmit from "./formSubmit";
+import TableProducts from "./TableProducts";
+import { category, product } from "@/app/types/all-types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -14,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -22,11 +25,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import formSubmit from "./formSubmit";
-import TableProducts from "./TableProducts";
-import { category, product } from "@/app/types/all-types";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { GridProduct } from "./gridProduct";
+
 const formSchema = z.object({
   name: z.string().min(3, {
     message: "Nombre de producto tiene mas de 3 caracteres",
@@ -35,21 +37,25 @@ const formSchema = z.object({
     message: "Descripción  tiene mas de 15 caracteres",
   }),
   image: z.string().nonempty({ message: "Imagen requerida" }),
-  price: z.number().nonnegative(),
-  inStock: z.boolean().default(true),
-  categoryId: z
-    .number()
-    .nonnegative()
-    .min(1, { message: "Categoria requerida" }),
+  price: z
+    .string()
+    .refine((price) => !isNaN(parseFloat(price)), {
+      message: "Precio es un numero",
+    }),
+  instock: z.string(),
+  categoryId: z.string().nonempty({ message: "categoria requerida" }),
 });
 type categories = category[];
 type products = product[];
+interface Props {
+  categories: categories;
+  products: products;
+}
 
-export default function ProductsForm(
-  { products }: { products: products },
-  { categories }: { categories: categories }
-) {
-  // ...
+export default function ProductsForm({ props }: { props: Props }) {
+  // const {toast}=useToast()
+  const products = props.products;
+  const categories = props.categories;
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,48 +63,66 @@ export default function ProductsForm(
       name: "",
       description: "",
       image: "",
-      price: 0.0,
-      inStock: true,
-      categoryId: 1,
+      price: "",
+      instock: "on",
+      categoryId: "Vino tinto",
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    //datos en formato necesitado   para servidor
+
+    const instock = values.instock === "on" ? true : false;
+    const category = categories.filter(
+      (item) => item.name === values.categoryId
+    );
+    const id = category[0].id;
+    
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("description", values.description);
     formData.append("image", values.image);
     formData.append("price", values.price.toString());
-    formData.append("inStock", values.inStock.toString());
-    formData.append("categoryId", values.categoryId.toString());
+    formData.append("instock", instock.valueOf().toString());
+    formData.append("categoryId", id.toString());
+
     let message = await formSubmit(formData);
     alert(message.message);
+   /* const crear=message.message
+    toast({
+     title: "Crea evento:",
+     description: crear,
+   }) */
 
     if (message.message === "Producto ha sido creado") {
+      const inStock = values.instock === "on" ? true : false;
+      const category = categories.filter(
+        (item) => item.name === values.categoryId
+      );
+      const id = category[0].id;
+
       products.push({
         id: products.length + 1,
         name: values.name,
         description: values.description,
         image: values.image,
-        price: values.price,
-        inStock: values.inStock,
-        categoryId: values.categoryId,
+        price: parseFloat(values.price),
+        instock: inStock,
+        categoryId: id, //category.name no es compatible con category.id
       });
       form.resetField("name");
       form.resetField("description");
       form.resetField("image");
       form.resetField("price");
-      form.resetField("inStock");
+      form.resetField("instock");
       form.resetField("categoryId");
     }
   }
 
   return (
-    <div className=" mx-auto mt-5 pt-10 pb-10 pl-10">
-      <Card className="m-auto p-6  text-xl   bg-red-100  ">
+    <div className="grid grid-cols-2 p-3 mt-10">
+      <Card className="w-full p-3  text-xl bg-red-100  ">
         <CardHeader>
           <CardTitle>Crea un producto:</CardTitle>
         </CardHeader>
@@ -148,11 +172,7 @@ export default function ProductsForm(
                     <FormItem>
                       <FormLabel>Imagen Producto</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          type="file"
-                          className="placeholder-red-500 "
-                        />
+                        <Input {...field} className="placeholder-red-500 " />
                       </FormControl>
 
                       <FormMessage />
@@ -182,16 +202,16 @@ export default function ProductsForm(
 
                 <FormField
                   control={form.control}
-                  name="inStock"
+                  name="instock"
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex flex-inline gap-2">
                         <FormControl>
-                          <Checkbox id="inStock" />
+                          <Checkbox id="instock" {...field} />
                         </FormControl>
 
                         <label
-                          htmlFor="inStock"
+                          htmlFor="instock"
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
                           In Stock
@@ -207,23 +227,22 @@ export default function ProductsForm(
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Categoria</FormLabel>
+                      <Select onValueChange={field.onChange}>
                       <FormControl>
-                        <Select>
-                          <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Catgoria" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {categories.map((item, id) => {
-                              return (
-                                <SelectItem value={item.name} key={item.id}>
-                                  {item.name}
-                                </SelectItem>
-                              );
-                            })}
-                          </SelectContent>
-                        </Select>
+                        <SelectTrigger className="w-[180px]" >
+                          <SelectValue placeholder="Category" />
+                        </SelectTrigger>                        
                       </FormControl>
-
+                      <SelectContent>
+                          {categories.map((item, id) => {
+                            return (
+                              <SelectItem value={item.name} key={item.id}>
+                                {item.name}
+                              </SelectItem>
+                            );
+                          })}
+                        </SelectContent>
+                        </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -242,7 +261,7 @@ export default function ProductsForm(
         </CardContent>
       </Card>
 
-      <div>{/* <TableProducts products={products} />  */}</div>
+      <GridProduct products={products} />
     </div>
   );
 }

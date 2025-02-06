@@ -1,20 +1,21 @@
 
 "use client"
 import React from 'react'  
-import { event } from '@/app/types/all-types'
+import { product } from '@/app/types/all-types'
 import { useState } from "react";
-import { handleDeleteEvent } from './handle';
-type events=event[]
+import { handleDeleteProduct } from './handle';
+
+type products=product[]
 
 
-export default  function TableEventos({events}:{events:events}) {
+export default  function TableProducts({products}:{products:products}) {
    
   const [currentPage, setCurrentPage] = useState(1);  
   const [postsPerPage,setPostsPerPage]=useState(8)
   const lastPageIndex=currentPage*postsPerPage
   const firstPostIndex=lastPageIndex-postsPerPage
-  const totalPosts=events.length
-  const currentPosts=events.slice(firstPostIndex,lastPageIndex)
+  const totalPosts=products.length
+  const currentPosts=products.slice(firstPostIndex,lastPageIndex)
   let pages=[]
     for(let i=1; i<=Math.ceil(totalPosts/postsPerPage);i++){
         pages.push(i)
@@ -32,23 +33,29 @@ export default  function TableEventos({events}:{events:events}) {
         <thead className="text-xs text-gray-900 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-4 py-3">
-              Id Evento
+              Id Product
             </th>
 
             <th scope="col" className="px-4 py-3">
-              Nombre Evento
+              Nombre 
             </th>
             <th scope="col" className="px-4 py-3">
-              Descripción Evento
+              Descripción 
             </th>
             <th scope="col" className="px-4 py-3">
-              Imagen Evento
+              Imagen 
             </th>
             <th scope="col" className="px-4 py-3">
-              Data Evento
+              Precio
             </th>
             <th scope="col" className="px-4 py-3">
-              Data publicado
+              En Stock
+            </th>
+            <th scope="col" className="px-4 py-3">
+              Category
+            </th>
+            <th scope="col" className="px-4 py-3">
+              
             </th>
             <th scope="col" className="px-4 py-3" colSpan={2}>
               Acción de completar
@@ -72,7 +79,7 @@ export default  function TableEventos({events}:{events:events}) {
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {item.title}
+                    {item.name}
                   </th>
                   <th
                     scope="row"
@@ -84,19 +91,25 @@ export default  function TableEventos({events}:{events:events}) {
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    <img src="/images/sobre3.jpg" width={120} height={80}/>
+                    <img src={item.image} width={120} height={80}/>
                   </th>
                   <th
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {item.dateEv}
+                    {item.price}
                   </th>
                   <th
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 text-wrap w-[150px] dark:text-white"
                   >
-                    {item.dateAt}
+                    {item.instock}
+                  </th>
+                  <th
+                    scope="row"
+                    className="px-4 py-4 font-medium text-gray-900 text-wrap w-[150px] dark:text-white"
+                  >
+                    {item.categoryId}
                   </th>
                   <td className="px-4 py-4">
                     <button
@@ -109,7 +122,7 @@ export default  function TableEventos({events}:{events:events}) {
                   </td>
                   <td className="px-6 py-4">
                     <button
-                      onClick={()=>handleDeleteEvent(item.id)}
+                      onClick={()=>handleDeleteProduct(item.id)}
                       className="font-medium text-red-600
                    dark:text-red-500 hover:underline"
                     >
@@ -136,7 +149,7 @@ export default  function TableEventos({events}:{events:events}) {
           <span className='pr-2'>of</span>
           
           <span className="font-semibold text-red-900 dark:text-white">
-           {events.length} 
+           {products.length} 
           </span>
         </div>
         

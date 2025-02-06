@@ -17,6 +17,6 @@ export type product={
     description:string,
     image:string,
     price:number,
-    inStock:boolean,
+    instock:boolean,
     categoryId:number
 }
