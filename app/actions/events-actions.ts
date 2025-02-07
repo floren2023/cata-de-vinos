@@ -26,11 +26,19 @@ export const addEvent=async(event:Event)=>{
      dateEv:event.dateEv,
      dateAt:event.dateAt
     }
+
+
  await db
     .insert(eventTable).values(newEvent)
     .returning(); 
      
 }
+
+export const getEvent=async(id:number)=>{
+    const data=await db.select().from(eventTable).where(eq(eventTable.id,id))
+    
+    return data
+} 
 
 export const deleteEvent=async(id:number)=>{
     await db

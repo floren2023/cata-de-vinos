@@ -17,6 +17,11 @@ export const getProducts=async()=>{
     return data
 }
 
+export const getProduct=async(id:number)=>{
+    const data=await db.select().from(productTable).where(eq(productTable.id,id))
+    
+    return data
+} 
 export const addProduct=async(product:Product)=>{
    
     let newProduct:Product={

@@ -12,7 +12,8 @@ import { Button } from "@/components/ui/button";
 
 export default function Product({ product }: { product: product }) {
   return (
-    <Card className="grid grid-cols-1 bg-gray-100 gap-2 mb-4 rounded-lg sombra4 border-red-100  border-2  dark:bg-gray-800 dark:border-gray-700">
+    <Card className="grid grid-cols-1 bg-gray-100 gap-2 mb-4 rounded-lg sombra4 border-red-100 transition hover:scale-105 
+     border-2  dark:bg-gray-800 dark:border-gray-700">
       <CardHeader className=" text-start pl-3 pt-3  justify-between">
         <div>
           <FaHeart className="w-6 h-6 pl-0 text-red-600" />
@@ -48,7 +49,8 @@ export default function Product({ product }: { product: product }) {
       <CardFooter className="justify-center">
         
           <Button className="bg-red-800 text-gray-200  merienda hover:bg-gray-200
-           hover:text-red-800 hover:border-2 hover:border-red-800">VER</Button>
+           hover:text-red-800 hover:border-2 hover:border-red-800 font-bold">
+            <a href={`/products/${product.id}`}>Ver</a></Button>
         
       </CardFooter>
     </Card>
