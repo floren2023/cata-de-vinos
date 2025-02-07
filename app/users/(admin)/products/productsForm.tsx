@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Textarea } from "flowbite-react";
 import formSubmit from "./formSubmit";
-import TableProducts from "./TableProducts";
+
 import { category, product } from "@/app/types/all-types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -130,9 +130,9 @@ export default function ProductsForm({ props }: { props: Props }) {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="text-xl grid grid-cols-2 gap-3"
+              className="text-xl grid grid-cols-2 gap-3" encType="multipart/form-data"
             >
-              <div className="flex flex-col gap-3 text-semibold">
+              <div className="flex flex-col gap-5 text-semibold">
                 <FormField
                   control={form.control}
                   name="name"
@@ -171,8 +171,8 @@ export default function ProductsForm({ props }: { props: Props }) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Imagen Producto</FormLabel>
-                      <FormControl>
-                        <Input {...field} className="placeholder-red-500 " />
+                      <FormControl >
+                        <input type="file" {...field}  className="text-sm rounded-md "/>
                       </FormControl>
 
                       <FormMessage />
@@ -189,9 +189,9 @@ export default function ProductsForm({ props }: { props: Props }) {
                       <FormLabel>Precio</FormLabel>
                       <FormControl>
                         <Input
-                          {...field}
-                          type="number"
-                          className="placeholder-red-500 "
+                          {...field} 
+                          type="number" 
+                          
                         />
                       </FormControl>
 
@@ -229,8 +229,8 @@ export default function ProductsForm({ props }: { props: Props }) {
                       <FormLabel>Categoria</FormLabel>
                       <Select onValueChange={field.onChange}>
                       <FormControl>
-                        <SelectTrigger className="w-[180px]" >
-                          <SelectValue placeholder="Category" />
+                        <SelectTrigger className="w-[200px] border-gray-700" >
+                          <SelectValue placeholder="Selecciona una categoria:" className="italic placeholder-gray-600  text-sm" />
                         </SelectTrigger>                        
                       </FormControl>
                       <SelectContent>
@@ -248,10 +248,10 @@ export default function ProductsForm({ props }: { props: Props }) {
                   )}
                 />
               </div>
-              <div className="col-span-2">
+              <div className="col-span-2 justify-end text-end items-end">
                 <Button
                   type="submit"
-                  className="bg-red-800 font-bold hover:bg-red-700 "
+                  className="bg-red-800 font-bold hover:bg-red-700  "
                 >
                   Crear
                 </Button>

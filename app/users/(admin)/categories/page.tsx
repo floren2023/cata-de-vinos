@@ -6,8 +6,7 @@ import CategoryForm from "./categoryForm copy";
 
 
 export default async function Categories(){
-    type categories=category[]
-    
+    type categories=category[]   
 
     const categories=await getCategories()
 

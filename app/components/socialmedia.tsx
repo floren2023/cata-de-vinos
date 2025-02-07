@@ -6,7 +6,7 @@ import { FaSquareFacebook, FaSquareWhatsapp } from "react-icons/fa6";
 
 export default function SocialMedia() {
   return (
-    <ul className="text-gray-500 dark:text-gray-400 font-medium flex flex-inline gap-6 pt-3">
+    <ul className="text-gray-500 dark:text-gray-400 font-medium flex flex-inline gap-4 pt-3">
       <li className="mb-4">
         <Link href="#" className="hover:underline">
           <RiTwitterXLine

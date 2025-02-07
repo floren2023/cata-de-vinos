@@ -20,3 +20,12 @@ export type product={
     instock:boolean,
     categoryId:number
 }
+export type post={   
+    id:number, 
+    authorId:number,
+    title:string,
+    description:string,
+    image:string,
+    article:string,
+    datePubl:string
+}

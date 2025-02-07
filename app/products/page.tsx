@@ -1,32 +1,32 @@
 import { getCategories } from '../actions/category-actions'
+import { getProducts } from '../actions/products-action'
 import NavigationCategory from '../components/NavigationCategory'
+import Product from '../components/Product'
 import { category } from '../types/all-types'
-export default async function Products(){
+
+
+export default async function Products(){ 
+
     type categories=category[]
-    const categories=getCategories()
+    const categories=await getCategories()
      const products=await getProducts()
     return(
-        <div className=" pr-10 pl-10 pt-8"  >
+        <div className="mt-20 pr-10 pl-10 pt-8 bg-gray-100"  >
 
   <NavigationCategory categories={categories}/>
     
-<div className="pt-6">
-<div  className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 mx-auto pl-10 ">
+
+<div  className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pb-10 mx-auto pl-10 pt-4 ">
   {
    
-    products.map(({ image, name, description, favorites, price }) => (
-       <Product 
-        image={image}
-        titulo={name}
-        descripcion={description}
-        favorites={favorites}
-        precio={price}
-      /> 
+    products.map((product,id) => (
+       <Product product={product} key={id}/>
+      
     ))
   }
 </div>
 </div> 
-</div>
+
     )
 
 }

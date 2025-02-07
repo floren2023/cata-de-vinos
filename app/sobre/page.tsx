@@ -29,7 +29,7 @@ export default function Sobre(){
         <div className="bg-gradient-to-b from-slate-100 via-red-100 to-gray-200 mt-20 text-md ml-10 mr-10 pb-10 pt-5">
    
    
-    <div className="font-[merienda] text-md text-red-800 pl-40 mt-20 pt-10">VEN A CONOCER NUESTRA TIENDA</div>
+    <div className="font-[merienda] text-md text-red-800 text-center pt-4 pb-4 bg-gray-200">VEN A CONOCER NUESTRA TIENDA</div>
     {/* <Image src="/images/sobre3.jpg"  height={200} alt="header" className="object-cover h-40" width={1280}/> */}
   
   

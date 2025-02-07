@@ -6,7 +6,7 @@ function HeaderEventos() {
     
     return (
         <div
-        className="w-full text-white content-center justify-center mt-20 pt-5 z-10 wrap-principal mb-10"
+        className="w-full text-white content-center justify-center mt-20  z-10 wrap-principal pt-5"
       >
         <div
           className="bg-red-800 justify-center text-center p-4 opacity-70 rounded-lg mx-auto border-2 border-white merienda-h3"

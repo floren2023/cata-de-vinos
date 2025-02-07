@@ -3,7 +3,7 @@ import SocialMedia from "./socialmedia";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-600 shadow-md shadow-gray-500  border-t-2 border-gray-200">
+    <footer className="bg-gray-100 dark:bg-gray-600 shadow-md shadow-gray-500 font-[bitter] border-t-2 border-gray-200">
       <div className="mx-auto w-full justify-center content-center items-center max-w-7xl">
         <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3 lg:grid-cols-4">
           <div>

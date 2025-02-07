@@ -10,7 +10,7 @@ export  default async function Events(){
         <div>Servicios</div>
         <HeaderEventos/>
     
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-10 pr-10 mb-10 gap-4 pt-6  ">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pl-10 pr-10 pb-10 pt-10 gap-4 bg-gray-200 ">
   
   {events.map((item,id)=>{
     return(
