@@ -1,6 +1,6 @@
 "use server"
 
-import { addProduct } from "@/app/actions/products-action"
+import { addProduct } from "@/app/actions/products-actions"
 
 
 

@@ -1,5 +1,5 @@
 "use server"
-import { getProduct } from '@/app/actions/products-action'
+import { getProduct } from '@/app/actions/products-actions'
 
 export default async function Product({params}:{params:{id:number}}){
     const {id} =params;

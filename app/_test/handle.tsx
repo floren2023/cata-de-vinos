@@ -1,6 +1,6 @@
 'use server'
 
-import { addProduct, deleteProduct } from "@/app/actions/products-action"
+import { addProduct, deleteProduct } from "@/app/actions/products-actions"
 
 export  async function handleAddProduct(product){
   

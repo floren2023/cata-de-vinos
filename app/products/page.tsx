@@ -1,5 +1,5 @@
 import { getCategories } from '../actions/category-actions'
-import { getProducts } from '../actions/products-action'
+import { getProducts } from '../actions/products-actions'
 import NavigationCategory from '../components/NavigationCategory'
 import Product from '../components/Product'
 import { category } from '../types/all-types'
