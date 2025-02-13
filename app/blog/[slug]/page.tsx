@@ -28,12 +28,12 @@ export default async function Page({params}:{params:{slug:string}}) {
 
     })
   return (
-    <div className='mx-auto justify-center content-center'>
+    <div className='mx-auto justify-center content-center w-full'>
       <h3 className='font-[merienda] text-red-800 text-center'>{data.frontmatter.titulo}</h3>
       <div className='mx-auto justify-center'>
         <Image src={data.frontmatter.img} alt={data.frontmatter.titulo} width={500} height={300} className='mx-auto rounded-md '/>
       </div>
-      <div>
+      <div  className="prose-gray prose-lg w-full mx-auto prose-invert">
       {data.content}
       </div>
     </div>

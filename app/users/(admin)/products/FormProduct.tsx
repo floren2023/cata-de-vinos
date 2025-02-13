@@ -1,5 +1,6 @@
 "use client";
 import { category } from "@/app/types/all-types";
+import { url } from "inspector";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -15,9 +16,10 @@ type FormData = {
 
 type categories = category[];
 export default function FormProduct({categories}:{categories:categories}) {
+  
   const [pending, setPending] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(null);
-  const[slug,setSlug]=useState<string>('')
+  const[slug,setSlug]=useState<any>('')
 
   const {
     register,
@@ -25,24 +27,38 @@ export default function FormProduct({categories}:{categories:categories}) {
     formState: { errors },
   } = useForm<FormData>();
 
-  const uploadImage=(file:File)=>{
-    let url=''
-     return url
+  const uploadImage=async(file:File):Promise<string>=>{
+    const form1Data=new FormData()  
+  form1Data.append("image",  file as Blob)
+   const response=await fetch("/api/file",{
+        method: "POST",
+        body:form1Data
+  }) 
+  
+  const blob=await response.json() 
+  const url=blob.data    
+  return url
   }
 
 
-  const onSubmit = (data: FormData) => {
-    setFile(data.imagen[0]) 
+  const onSubmit = async(data: FormData) => {
+    setFile(data.imagen[0])
+    let res=''
     setPending(true)
    if(typeof file!=='undefined'){
-     let url:string= uploadImage(file)
-     setSlug(url)
+    
+    res=await uploadImage(file) 
+    console.log(res)
+      setPending(false)
+      setSlug(res)
+    
+     
    }
 
     const formData=new FormData()
     formData.append("name",data.name)
     formData.append("description",data.description)
-    formData.append("imageUrl",slug)
+    formData.append("imageUrl",res)
     formData.append("price",data.price.toString())
     formData.append("instock",data.instock.valueOf())
     formData.append("categoryId",data.categoryId)
@@ -55,21 +71,21 @@ export default function FormProduct({categories}:{categories:categories}) {
     const target = event.target as HTMLInputElement & {
       files: FileList;
     };
-    console.log(target);
+    
     setFile(target.files[0])
     
   };
 
   return (
     <div className=" pt-4 border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4">
-      <div className="text-xl  pb-5 text-center">Servicios</div>
+      <div className="text-xl  pb-5 text-center">Products</div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-4 p-4  mx-auto   "
       >
         <div>
           <label className="block font-semibold" htmlFor="name">
-            Name:
+            Nombre producto:
           </label>
           <input
             id="name"
@@ -81,7 +97,7 @@ export default function FormProduct({categories}:{categories:categories}) {
 
         <div>
           <label className="block font-semibold" htmlFor="description">
-            Description
+            Descripción:
           </label>
           <input
             id="description"
@@ -97,19 +113,19 @@ export default function FormProduct({categories}:{categories:categories}) {
 
         <div>
           <label className="block font-semibold" htmlFor="imagen">
-            Image:
+            Imagen producto:
           </label>
           <input
             id="imagen"
             type="file"
             {...register("imagen")}
-            onChange={(event) => handleOnChange}
+            onChange={(e) => handleOnChange(e)}
             className="border p-2 rounded w-full"
           />
         </div>
         <div>
           <label className="block font-semibold" htmlFor="price">
-            Price:
+            Precio:
           </label>
           <input
             id="price"
@@ -127,7 +143,7 @@ export default function FormProduct({categories}:{categories:categories}) {
         <label htmlFor="instock">In Stock</label>
        </div>
        <div>
-       <label htmlFor="categoryId">Choose a category:</label>
+       <label htmlFor="categoryId">Elige categoria:</label>
 
 <select name="categoryId" id="categoryId" {...register("categoryId")}>
         

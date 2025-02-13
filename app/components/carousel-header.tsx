@@ -6,14 +6,14 @@ import { Carousel } from 'react-responsive-carousel';
 
 const data = [
     {
-      image: "/images/carousel/degustacion1.jpg",
+      image: "https://da5w64qce4n0sawk.public.blob.vercel-storage.com/carousel/carousel1-1aNjTChaQE9XDrbRY0PEyLm4nIrjox.jpg",
       title: "Vinos para festividades",
     },
-    { image: "/images/carousel/carousel2.jpg", title: "Catas excepcionales" },
-    { image: "/images/carousel/carousel3.jpg", title: "Catas en casa" },
-    { image: "/images/carousel/marridaje2.jpg", title: "Maridajes" },
+    { image: "https://da5w64qce4n0sawk.public.blob.vercel-storage.com/carousel/carousel2-adb6M7m3qQxtUUmkyoh5bvrGm7aWEG.jpg", title: "Catas excepcionales" },
+    { image: "https://da5w64qce4n0sawk.public.blob.vercel-storage.com/carousel/carousel3-g2io5IHvWxogPW65xRFHWwUPRYya40.jpg", title: "Catas en casa" },
+    { image: "https://da5w64qce4n0sawk.public.blob.vercel-storage.com/carousel/carousel4-PhWf3J1UhIorJ6zP7cQrjQIqPuKi1w.jpg", title: "Maridajes" },
     
-    { image: "/images/carousel/cata3.jpg", title: "Marcas reconocidas internas e internacionales" },
+    { image: "https://da5w64qce4n0sawk.public.blob.vercel-storage.com/carousel/carousel5-6wfBM7mjVTZgvp5XwmOMTynTq2c0LK.jpg", title: "Marcas reconocidas internas e internacionales" },
   ];
 
 export default function CarouselHeader(){

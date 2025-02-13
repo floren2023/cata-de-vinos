@@ -6,14 +6,18 @@ const nextConfig: NextConfig = {
    // Configure `pageExtensions` to include markdown and MDX files
    pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
    // Optionally, add any other Next.js config below
-   images: {
-      remotePatterns: [
+   images: {  
+          remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'https://vercel.com/florens-projects-c4c4328b/~/stores/blob/store_dA5W64QcE4N0SaWK',
+          hostname: '**',
           port: '',
+           pathname: '/**'
         },
       ],
+
+      formats: ['image/avif', 'image/webp',],
+      minimumCacheTTL: 60, // 1 minute cache for images
     },
 };
 

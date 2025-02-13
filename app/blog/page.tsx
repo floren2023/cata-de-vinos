@@ -18,16 +18,13 @@ export default async function Blog() {
         path.join(process.cwd(), "app/blog/content", filename),
         "utf-8"
       );
-      const data = await compileMDX<{
-        titulo: string;
+      const data = await compileMDX<{titulo: string;
         description: string;
         img: string;
         autor: string;
         fecha: string;
         setOrder: number;
-      }>({
-        source: content,
-        options: {
+      }>({ source: content,  options: {
           parseFrontmatter: true,
         },
       });
@@ -115,9 +112,9 @@ export default async function Blog() {
             </p>
           </div>
           <ul className="flex flex-col gap-3 text-md">
-            {blogs.map((blog, setOrder) => {
+            {blogs.map((blog, index) => {
               return (
-                <li key={blog.setOrder} className="text-red-900">
+                <li key={index} className="text-red-900">
                   <a
                     href={`/blog/${blog.slug}`}
                     className="pb-3 text-gray-800 hover:text-red-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
