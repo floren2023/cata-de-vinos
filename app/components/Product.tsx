@@ -12,7 +12,8 @@ import { Button } from "@/components/ui/button";
 
 export default function Product({ product }: { product: product }) {
   return (
-    <Card className="grid grid-cols-1 bg-gray-100 gap-2 mb-4 rounded-lg sombra4 border-red-100 transition hover:scale-105 
+    <Card className="grid grid-cols-1 bg-white gap-2 mb-4 rounded-lg sombra4
+     border-red-100 transition hover:scale-105 
      border-2  dark:bg-gray-800 dark:border-gray-700">
       <CardHeader className=" text-start pl-3 pt-3  justify-between">
         <div>
@@ -22,8 +23,8 @@ export default function Product({ product }: { product: product }) {
           <Image
             src={product.image}
             alt={product.name}
-            width={100}
-            height={70}
+            width={200}
+            height={300}
           />
         </div>
       </CardHeader>

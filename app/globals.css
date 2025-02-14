@@ -13,7 +13,9 @@
   font-weight: 300;
   font-style: normal;
 }
-
+.tabsContainer select:focus, ring ,selected, active {
+  border-color: #80143c;
+}
 
 .bitter {
   font-family: "Bitter", serif;

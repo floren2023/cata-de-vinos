@@ -1,8 +1,9 @@
 "use server"
 
 import { db } from "../db/drizzle"
-import { productTable } from "../db/schema"
+import { categoryTable, productTable} from "../db/schema"
 import { eq } from "drizzle-orm"
+import { schema } from "../db/schema"
  
  type Product={    
     name:string,
@@ -17,11 +18,20 @@ export const getProducts=async()=>{
     return data
 }
 
+
 export const getProduct=async(id:number)=>{
-    const data=await db.select().from(productTable).where(eq(productTable.id,id))
-    
+  //  const data=await db.select().from(productTable).where(eq(productTable.id,id))
+   
+  const data=await db.select().from(productTable)
+  .innerJoin(categoryTable,eq(categoryTable.id,productTable.categoryId)).where(eq(productTable.id,id))
+      
     return data
-} 
+    }
+    
+ 
+
+    
+
 export const addProduct=async(product:Product)=>{
    
     let newProduct:Product={

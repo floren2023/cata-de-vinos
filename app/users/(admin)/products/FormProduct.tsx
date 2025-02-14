@@ -1,22 +1,33 @@
 "use client";
-import { category } from "@/app/types/all-types";
-import { url } from "inspector";
+import React,{FC}  from 'react'
+import { category, product } from "@/app/types/all-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import formSubmit from "./formSubmit";
+import { GridProduct } from './gridProduct';
 
 type FormData = {
   name: string;
-  description: string;
-  imagen: File;
+  description: string;  
   imageUrl:string,
+  imagen:File,
   instock: string;
   price: string;
   categoryId: string;
 };
 
 type categories = category[];
-export default function FormProduct({categories}:{categories:categories}) {
-  
+type products = product[];
+interface Props {
+  categories: categories;
+  products: products;
+}
+
+export default function  FormProduct  (props:Props)  {
+
+ const products=props.products
+ const categories=props.categories
+
   const [pending, setPending] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(null);
   const[slug,setSlug]=useState<any>('')
@@ -24,6 +35,7 @@ export default function FormProduct({categories}:{categories:categories}) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -48,7 +60,7 @@ export default function FormProduct({categories}:{categories:categories}) {
    if(typeof file!=='undefined'){
     
     res=await uploadImage(file) 
-    console.log(res)
+    
       setPending(false)
       setSlug(res)
     
@@ -62,9 +74,31 @@ export default function FormProduct({categories}:{categories:categories}) {
     formData.append("price",data.price.toString())
     formData.append("instock",data.instock.valueOf())
     formData.append("categoryId",data.categoryId)
-    console.log(formData)
-
     
+     let message = await formSubmit(formData);
+        alert(message.message);
+       /* const crear=message.message
+        toast({
+         title: "Crea evento:",
+         description: crear,
+       }) */
+    
+        if (message.message === "Producto ha sido creado") {          
+    
+          products.push({
+            id: products.length + 1,
+            name: data.name,
+            description: data.description,
+            image: data.imageUrl,
+            price:parseFloat(data.price),
+            instock: (data.instock==='true')?true:false,
+            categoryId: parseInt(data.categoryId), //category.name no es compatible con category.id
+          });
+          
+          reset()
+         
+
+        } 
   };
 
   const handleOnChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -77,11 +111,12 @@ export default function FormProduct({categories}:{categories:categories}) {
   };
 
   return (
-    <div className=" pt-4 border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+      <div className=' border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4 ml-10 w-full h-[600px]'>
       <div className="text-xl  pb-5 text-center">Products</div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 p-4  mx-auto   "
+        className="space-y-4 p-4    "
       >
         <div>
           <label className="block font-semibold" htmlFor="name">
@@ -150,7 +185,7 @@ export default function FormProduct({categories}:{categories:categories}) {
   {
     categories.map((category,id)=>{
       return (
-      <option value={category.name} key={category.id}>{category.name}</option>
+      <option value={category.id} key={category.id}>{category.name}</option>
       )
     })
   }
@@ -164,6 +199,10 @@ export default function FormProduct({categories}:{categories:categories}) {
         </button>
         </div>
       </form>
+    </div>
+    <div className='mt-10 sm:col-span-1 md:colspan-1 lg:col-span-2 mx-auto mb-10'>
+       <GridProduct products={products} />
+    </div>
     </div>
   );
 }

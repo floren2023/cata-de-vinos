@@ -2,19 +2,20 @@
 import React from 'react'  
 import { product } from '@/app/types/all-types'
 
-import { handleDeleteProduct } from './handle';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
+import { handleDeleteProduct } from './handle';
 type products=product[]
 
 export function GridProduct({products}:{products:products}){
 
     return(
-        <div className="w-full p-3 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="  grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
             {products.map((item,id)=>{
                 return(
-                  <Card className="w-[280px] text-md  
-                  shadow-sm text-center content-center items-center" key={item.id}>
+                  <Card className="w-[320px] text-md  justify-center sombra4 bg-white
+                   text-center content-center items-center" key={item.id}>
                   <CardHeader>
                     <CardTitle className='text-center'>{item.name}</CardTitle>
                     <CardDescription>{item.description}</CardDescription>

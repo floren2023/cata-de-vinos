@@ -10,8 +10,8 @@ export default function Header() {
             className="bg-gray-100 justify-center text-red-900 text-2xl   tracking-wider 
     pt-20 text-center font-[merienda]"
           >
-            ¡Bienvenidos a <span className="text-red-600  ">Cata de vinos</span>
-            !
+            ¡Bienvenidos a <span className="text-red-600  ">Cata de vinos!</span>
+            
           </div>
           <div className="text-md  text-red-900    tracking-wide  justify-center text-center">
             CATAS A LA CARTA Y MARIDAJES
@@ -22,7 +22,7 @@ export default function Header() {
           </div>
           <div className="mx-auto z-10 text-center justify-center mt-10">
             <Link
-              href="/servicios"
+              href="/events"
               className="rounded-md hover:bg-gray-100 hover:text-red-900  text-white border-2 cursor-pointer  
                  border-red-900 shadow-md bg-red-800 text-xl semibold pt-4  pl-6 pr-6 pb-4
                  transition-ease-out hover:scale-110  uppercase tracking-wider font-[merienda]"

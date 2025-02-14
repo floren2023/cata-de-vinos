@@ -16,7 +16,7 @@ import {
 
 export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
 
-export const userTable = pgTable(  "users",
+export const userTable = pgTable(  "user",
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
