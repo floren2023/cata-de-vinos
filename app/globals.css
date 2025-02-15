@@ -36,6 +36,11 @@
     background-repeat: no-repeat;
     background-size: auto;
   }
+  @layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
   
     
     
