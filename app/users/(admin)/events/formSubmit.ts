@@ -7,12 +7,12 @@ export type FormState={
 }
 
 export default async function formSubmit(data:FormData):Promise<FormState>{   
-
+      console.log(data)
      const title=data.get("title")
      const description=data.get("description")
-     const image=data.get("image")
+     const image=data.get("imageUrl")
      const dateEv=data.get("dateEv")
-const dateAt=(new Date()).toString()
+     const dateAt=data.get("dateAt")
     if(!title||!description||!image){
         
         return{
@@ -27,10 +27,10 @@ const dateAt=(new Date()).toString()
             description:description.toString(),
             image:image.toString(),
             dateEv:dateEv.toString(),
-            dateAt:dateAt
+            dateAt:dateAt.toString()
         }
          
-       addEvent(newEvent)
+      await addEvent(newEvent)
 
         return{
             message:"Evento creado con exito!"

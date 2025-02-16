@@ -12,7 +12,7 @@ export default async function Events() {
 
   return (
     <div>
-      <div className="text-2xl mt-10 pl-40">Servicios</div>
+     
       <EventsForm events={events}/>
     </div>
   );

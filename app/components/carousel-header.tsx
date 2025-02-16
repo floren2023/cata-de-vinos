@@ -23,6 +23,7 @@ export default function CarouselHeader(){
         interval={3000}
         autoPlay={true}
         infiniteLoop={true}
+        thumbWidth={500}
         >
             {data.map((item,id)=>{
                 return(

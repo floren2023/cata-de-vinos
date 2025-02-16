@@ -1,10 +1,13 @@
 "use client";
-import { IoMdMenu } from "react-icons/io";
-import { category, product } from "../types/all-types";
+import { IoIosArrowDown, IoMdMenu } from "react-icons/io";
+import { category } from "../types/all-types";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useDebounce } from "use-debounce";
 import { Search } from "lucide-react";
+import { FaFilterCircleDollar } from "react-icons/fa6";
+import "react-range-slider-input/dist/style.css";
+
 import {
   Select,
   SelectContent,
@@ -16,10 +19,29 @@ import {
 } from "@/components/ui/select";
 
 import { useEffect, useState } from "react";
-import { string } from "zod";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { MdCategory } from "react-icons/md";
+
+const SORT_OPTIONS = [
+  { name: "None", value: "none" },
+  { name: "Price1", value: "0-9 EUR" },
+  { name: "Price2", value: "9-19 EUR" },
+  { name: "Price3", value: "19-49 EUR" },
+  { name: "Price4", value: "49-99 EUR" },
+  { name: "Price5", value: "99-200 EUR" },
+  { name: "Price6", value: ">200 EUR" },
+];
 
 type categories = category[];
-type products = product[];
+
 interface Props {
   categories: categories;
 }
@@ -29,51 +51,13 @@ function NavigationCategory({ categories }: Props) {
   const router = useRouter();
   const [query] = useDebounce(text, 500);
   const [selectedValue, setSelectedValue] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
-  const [selectedPriceMin, setSelectedPriceMin] = useState(0);
-  const [selectedPriceMax, setSelectedPriceMax] = useState(0);
-
-  const stringPrecios = [
-    {
-      id: 1,
-      name: "1-9 EUR",
-      priceMin: 1,
-      priceMax: 9,
-    },
-    {
-      id: 2,
-      name: "9-19 EUR",
-      priceMin: 9,
-      priceMax: 19,
-    },
-    {
-      id: 3,
-      name: "19-49 EUR",
-      priceMin: 19,
-      priceMax: 49,
-    },
-    {
-      id: 4,
-      name: "49-99 EUR",
-      priceMin: 49,
-      priceMax: 99,
-    },
-    {
-      id: 5,
-      name: "99-200 EUR",
-      priceMin: 99,
-      priceMax: 200,
-    },
-    {
-      id: 6,
-      name: ">200 EUR",
-      priceMin: 200,
-      priceMax: 1000,
-    },
-  ];
+  const [filter, setFilter] = useState({
+    sort: "none",
+  });
+  console.log(filter.sort);
 
   useEffect(() => {
-    if (!query && !selectedValue) {
+    if (!query && !selectedValue&&filter.sort==='none') {
       router.push(`/products`);
     } else {
       if (query) {
@@ -82,193 +66,180 @@ function NavigationCategory({ categories }: Props) {
         if (selectedValue) {
           router.push(`/products?category=${selectedValue}`);
         } else {
-           
-             if(selectedPriceMin&&selectedPriceMax){           
-
-            router.push(`/products?minPrice=${selectedPriceMin}&&maxPrice=${selectedPriceMax}`);
+          if (filter.sort!=='none') {
+            
+            router.push(`/products?price=${filter.sort}`);
           }
         }
       }
     }
-  }, [query, selectedValue, selectedPrice, router]);
+  }, [query, selectedValue, filter, router]);
 
   const handleChangeSelect = (value: string) => {
     setSelectedValue(value);
   };
 
-  const handleSelectedPrice = (value: string) => {
-    setSelectedPrice(value);
-    
-    const price = stringPrecios.filter((price) => price.name === value);
-    const priceMin = price[0].priceMin;
-    const priceMax = price[0].priceMax;
-    setSelectedPriceMin(priceMin);
-    setSelectedPriceMax(priceMax);
-    
-  };
-
   return (
-    <div>
-      <div className="flex flex-end p-3 justify-end bg-gray-100 gap-3  rounded-md sombra3 mx-auto pt-5">
-        <div className="text-red-800 italic text-xl merienda-h3   hidden lg:flex pl-5">
-          Disfruta de nuestros mejores productos:
-        </div>
-        <button
-          data-collapse-toggle="navbar-dropdown"
-          type="button"
-          className="inline-flex items-center
-       p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden
-        hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200
-         dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-dropdown"
-          aria-expanded="false"
+    <div className="flex flex-inline p-3  mt-3 content-center items-center justify-between bg-gray-100  rounded-md sombra3 mx-auto pt-5">
+      <div className="text-red-800 italic text-xl merienda-h3   hidden lg:block pl-10">
+        Disfruta de nuestros productos:
+      </div>
+
+      {/* // select with category */}
+      <div className=" flex-inline hidden  md:flex lg:flex   ">
+       
+        <Select
+          name="selectCategory"
+          value={selectedValue}
+          onValueChange={(value) => handleChangeSelect(value)}
         >
-          <span className="sr-only">Abre menu principal</span>
-          <IoMdMenu />
-        </button>
-        <nav className="flex flex-inline   md:gap-5 lg:gap-6 pl-10 pr-10 justify-between ">
-          {/* // select with category */}
-          <div className=" flex-inline hidden  md:flex lg:flex   ">
-            <div className="text-gray-400 italic md:text-sm lg:text-md pr-3 pt-2">
-              Buscar por categoria:
-            </div>
+          <SelectTrigger className="w-[220px]  text-gray-500 italic text-sm  border-gray-300 border-2 border-spacing-1">
+         
+          <MdCategory className="w-6 h-6 text-gray-400"/>
+            <SelectValue placeholder="Buscar por categoria:" />
+          </SelectTrigger>
+          <SelectContent className="bg-white">
+            <SelectGroup>
+              <SelectLabel className="bg-red-100">Vinos</SelectLabel>
+              {categories.map(
+                (item, id) =>
+                  item.name?.toLowerCase().includes("Vino".toLowerCase()) === true && (
+                    <SelectItem
+                      value={item.name}
+                      key={item.id}
+                      className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
+                    >
+                      {item.name}
+                    </SelectItem>
+                  )
+              )}
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel className="bg-red-100">Licores</SelectLabel>
+              {categories.map(
+                (item, id) =>
+                  item.name?.toLowerCase().includes("Licor".toLowerCase()) ===
+                    true && (
+                    <SelectItem
+                      value={item.name}
+                      key={item.id}
+                      className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
+                    >
+                      {item.name}
+                    </SelectItem>
+                  )
+              )}
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel className="bg-red-100">Wiskey</SelectLabel>
+              {categories.map(
+                (item, id) =>
+                  item.name?.toLowerCase().includes("Wiskey".toLowerCase()) ===
+                    true && (
+                    <SelectItem
+                      value={item.name}
+                      key={item.id}
+                      className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
+                    >
+                      {item.name}
+                    </SelectItem>
+                  )
+              )}
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel className="bg-red-100">Cestas y Regalos</SelectLabel>
+              {categories.map(
+                (item, id) =>
+                  item.name?.toLowerCase().includes("Regalos".toLowerCase()) ===
+                    true && (
+                    <SelectItem
+                      value={item.name}
+                      key={item.id}
+                      className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
+                    >
+                      {item.name}
+                    </SelectItem>
+                  )
+              )}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
 
-            <Select
-              name="selectCategory"
-              value={selectedValue}
-              onValueChange={(value) => handleChangeSelect(value)}
-            >
-              <SelectTrigger className="md:w-[150px] lg:w-[200px] border-gray-400 text-gray-600">
-                <SelectValue placeholder="Selectiona una categoria" />
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectGroup>
-                  <SelectLabel className="bg-red-100">Vinos</SelectLabel>
-                  {categories.map(
-                    (item, id) =>
-                      item.name?.includes("Vino") === true && (
-                        <SelectItem
-                          value={item.name}
-                          key={item.id}
-                          className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      )
-                  )}
-                </SelectGroup>
-                <SelectGroup>
-                  <SelectLabel className="bg-red-100">Licores</SelectLabel>
-                  {categories.map(
-                    (item, id) =>
-                      item.name
-                        ?.toLowerCase()
-                        .includes("Licor".toLowerCase()) === true && (
-                        <SelectItem
-                          value={item.name}
-                          key={item.id}
-                          className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      )
-                  )}
-                </SelectGroup>
-                <SelectGroup>
-                  <SelectLabel className="bg-red-100">Wiskey</SelectLabel>
-                  {categories.map(
-                    (item, id) =>
-                      item.name
-                        ?.toLowerCase()
-                        .includes("Wiskey".toLowerCase()) === true && (
-                        <SelectItem
-                          value={item.name}
-                          key={item.id}
-                          className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      )
-                  )}
-                </SelectGroup>
-                <SelectGroup>
-                  <SelectLabel className="bg-red-100">
-                    Cestas y Regalos
-                  </SelectLabel>
-                  {categories.map(
-                    (item, id) =>
-                      item.name
-                        ?.toLowerCase()
-                        .includes("Regalos".toLowerCase()) === true && (
-                        <SelectItem
-                          value={item.name}
-                          key={item.id}
-                          className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      )
-                  )}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+      {/* //select price */}
+      <div className=" flex-inline hidden  md:flex lg:flex w-1/5 pt-2 ">
+      
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild  
+  className={cn(
+    "flex cursor-default gap-2 select-none items-center mb-2 rounded-md px-2 py-1 border-gray-300 border-2 border-spacing-1 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none ",
+    
+  )}
+  ><div className="w-[200px]  text-gray-500 italic text-sm ">
+    < FaFilterCircleDollar className="pl-2 text-gray-400 w-6 h-6 " />Buscar por precio:<IoIosArrowDown /></div>
+                        
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="bg-white">
+            <DropdownMenuLabel>Precio</DropdownMenuLabel>
+            {SORT_OPTIONS.map((item, id) => (
+              <DropdownMenuItem key={item.name} >
+                <button 
+                  className={cn('text-left w-full block px-4 py-2 text-sm',{'text-gray-900 bg-gray-100':item.value===filter.sort,
+                    'text-gray-500':item.value!==filter.sort}
+                     )}
+                  onClick={() => {
+                    setFilter((prev) => ({
+                      ...prev,
+                      sort: item.value,
+                    }));
+                  }}
+                >
+                  {item.value}
+                </button>
+                </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {/* search menu bar */}
+
+      <div className="flex flex-end max-w-sm  md:w-[200px] lg:w-[300px] pl-3 pr-10">
+        <div className="relative w-full ">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3 md:pb-5 lg:pb-1 pointer-events-none">
+            <Search
+              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+            />
           </div>
 
-          {/* //select price */}
-          <div className=" flex-inline hidden  md:flex lg:flex   ">
-            <div className="text-gray-400 italic md:text-sm lg:text-md pr-3 pt-2">
-              Buscar por precio:
-            </div>
-
-            <Select
-              name="selectPrice"
-              onValueChange={(value) => handleSelectedPrice(value)}
-              defaultValue={selectedPrice}>
-            
-              <SelectTrigger className=" w-[150px] border-gray-400 text-gray-600">
-                <SelectValue placeholder="Selectiona precio" />
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                {stringPrecios.map((item, id) => (
-                  <SelectItem
-                    value={item.name}
-                    key={item.id}
-                    className="pl-5 hover:bg-gray-200 active:bg-gray-200 focus:bg-gray-200"
-                  >
-                    {item.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* search menu bar */}
-
-          <div className="flex flex-end max-w-sm  md:w-[100px] lg:w-[230px] pl-3">
-            <div className="relative w-full ">
-              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <Search
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-
-              <input
-                name="search-text"
-                type="text"
-                onChange={(e) => setText(e.target.value)}
-                id="search-text"
-                value={text}
-                className="bg-gray-50 border border-gray-300 
+          <input
+            name="search-text"
+            type="text"
+            onChange={(e) => setText(e.target.value)}
+            id="search-text"
+            value={text}
+            className="bg-gray-50 border border-gray-300 
          text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500
           block w-full ps-10 p-2  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
            dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                placeholder="Buscar producto..."
-              />
-            </div>
-          </div>
-        </nav>
+            placeholder="Buscar producto..."
+          />
+        </div>
       </div>
+      <button
+        data-collapse-toggle="navbar-dropdown"
+        type="button"
+        className="inline-flex items-center
+       p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden
+        hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200
+         dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-dropdown"
+        aria-expanded="false"
+      >
+        <span className="sr-only">Abre menu principal</span>
+        <IoMdMenu />
+      </button>
     </div>
   );
 }

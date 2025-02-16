@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import formSubmit from "./formSubmit";
 import { GridProduct } from './gridProduct';
 
+
 type FormData = {
   name: string;
   description: string;  
@@ -16,19 +17,19 @@ type FormData = {
   categoryId: string;
 };
 
-type categories = category[];
-type products = product[];
-interface Props {
-  categories: categories;
-  products: products;
-}
+ type categories=category[]
+  type products= {
+    product:product,
+    category:category
+     }[]
 
-export default function  FormProduct  (props:Props)  {
 
- const products=props.products
- const categories=props.categories
 
-  const [pending, setPending] = useState<boolean>(false);
+export default function  FormProduct  ({products,categories}:{products:products, categories:categories})
+
+ {
+  
+   const [pending, setPending] = useState<boolean>(false);
   const [file, setFile] = useState<File | undefined>(null);
   const[slug,setSlug]=useState<any>('')
 
@@ -57,15 +58,11 @@ export default function  FormProduct  (props:Props)  {
     setFile(data.imagen[0])
     let res=''
     setPending(true)
-   if(typeof file!=='undefined'){
-    
-    res=await uploadImage(file) 
-    
+   if(typeof file!=='undefined'){    
+    res=await uploadImage(file)     
       setPending(false)
       setSlug(res)
-    
-     
-   }
+       }
 
     const formData=new FormData()
     formData.append("name",data.name)
@@ -83,9 +80,8 @@ export default function  FormProduct  (props:Props)  {
          description: crear,
        }) */
     
-        if (message.message === "Producto ha sido creado") {          
-    
-          products.push({
+        if (message.message === "Producto creado con exito!") {  
+          const productNew={
             id: products.length + 1,
             name: data.name,
             description: data.description,
@@ -93,13 +89,22 @@ export default function  FormProduct  (props:Props)  {
             price:parseFloat(data.price),
             instock: (data.instock==='true')?true:false,
             categoryId: parseInt(data.categoryId), //category.name no es compatible con category.id
-          });
-          
-          reset()
-         
 
-        } 
-  };
+          }  
+          let cat=categories.find(item=>item.id===parseInt(data.categoryId) ) 
+          const categoryNew={
+            id:parseInt(data.categoryId),
+            name:cat.name
+          }
+           const prod={
+            product:productNew,
+            category:categoryNew
+           }
+           console.log(prod)
+          products.push(prod)           
+        }        
+                 reset()
+     };
 
   const handleOnChange = (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement & {
@@ -173,9 +178,12 @@ export default function  FormProduct  (props:Props)  {
           )}
               
         </div>
-        <div>
-        <input type="checkbox" id="instock" {...register("instock")}/>
-        <label htmlFor="instock">In Stock</label>
+        <div className='flex flex-inline gap-2 items-center'>
+        <input type="checkbox" id="instock" {...register("instock")}  className="w-4 h-4 text-red-600
+         bg-gray-100 border-gray-300 rounded-sm focus:ring-red-500 dark:focus:ring-red-600
+          dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+
+        <label htmlFor="instock" >In Stock</label>
        </div>
        <div>
        <label htmlFor="categoryId">Elige categoria:</label>

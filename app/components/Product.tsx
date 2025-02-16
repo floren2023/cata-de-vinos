@@ -16,53 +16,55 @@ export default function Product({ item }: { item:{product:product, category:cate
   const prod=item.product
   const category=item.category
   return (
-    <Card className="grid grid-cols-1 bg-white gap-2 mb-4 rounded-lg sombra4
+    <Card className=" bg-white  mb-4 rounded-lg sombra4
      border-red-100 transition hover:scale-105 
      border-2  dark:bg-gray-800 dark:border-gray-700">
       <CardHeader className=" text-start pl-3 pt-3  justify-between">
-        <div className="flex flex-inline justify-between">
+        
         <div>
           <FaHeart className="w-6 h-6 pl-0 text-red-600" />
         </div>
-        <div className="text-md font-semibold text-gray-900 dark:text-white
-         text-end justify-end pr-2 ">
-          <p className="text-red-800 mr-2 text-xl pt-4">€<span className="pl-2">
-          {prod.price}</span></p>
-        </div>
-</div>
-        <div className="mx-auto">
-          <Image 
-            src={prod.image}
-            alt={prod.name}
-           width={200} height={0} className="h-auto "
-          />
-        </div>
-      </CardHeader>
-      <CardContent>
-       
-        <div className="justify-center flex flex-col mx-auto  ">
-          <div className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center pb-2
+        <div className="flex flex-inline justify-around">
+        <div className="text-md font-semibold tracking-tight text-gray-900 dark:text-white text-center 
             pl-0 ml-0">
             {prod.name}
           </div>
+        <div className="text-md font-semibold text-gray-900 dark:text-white
+         text-end justify-end  ">
+          <p className="text-red-800 mr-2 text-md ">€<span className="pl-2">
+          {prod.price}</span></p>
+        </div>
+</div>
+       
+      </CardHeader>
+      <CardContent>
+      <div className=" w-full mx-auto">
+          <Image
+            src={prod.image}
+            alt={prod.name}
+           width={225} height={225} className=" object-cover mx-auto"
+          />
+        </div>
+        <div className="justify-start flex flex-col pl-5 pt-3  ">
+         
 
-          <div className="text-md tracking-tight text-red-900 dark:text-white justify-center text-center
-           pl-5 pr-5 text-wrap">
-            {prod.description}
+          <div className="text-md tracking-tight text-red-900 dark:text-white  text-start">
+            {prod.description.substring(0,35)}
           </div>
-          <div className="text-sm tracking-wide text-gray-600 font-bold italic pt-3 dark:text-white justify-center text-center
-           pl-5 pr-5 ">
+          <div className="text-sm tracking-wide text-gray-600 font-bold italic  dark:text-white
+           text-start  ">
             {category.name}
           </div>
         </div>
-      </CardContent>
-      <CardFooter className="justify-center">
+      
+      <div className="justify-center h-18 w-full mx-auto text-center content-center pt-3">
         
           <Button className="bg-red-800 text-gray-200  merienda hover:bg-gray-200
-           hover:text-red-800 hover:border-2 hover:border-red-800 font-bold">
+           hover:text-red-800 hover:border-2 hover:border-red-800 font-bold ">
             <a href={`/products/${prod.id}`}>Ver</a></Button>
         
-      </CardFooter>
+      </div>
+      </CardContent>
     </Card>
   );
 }

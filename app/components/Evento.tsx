@@ -1,46 +1,66 @@
-"use client"
-import React from 'react'
+"use client";
+import React from "react";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Datepicker } from "flowbite-react";
 
 interface Props {
-    image:string,
-    title:string, 
-    description:string,
-    dateEv:string
+  image: string;
+  title: string;
+  description: string;
+  dateEv: string;
 }
 
-function Evento({image,title,description,dateEv}:Props) {
-    
 
-    return (
-        <div className="block bg-white  rounded-md border-2 border-red-100
- dark:bg-gray-800 dark:border-gray-700 w-full  mx-auto shadow-sm shadow-gray-200 
- transition hover:scale-105  ">
-     <div className="w-full rounded-t-md  justify-center items-start content-start mx-auto  ">
+function Evento({ image, title, description, dateEv }: Props) {
+  return (
+    <Card className="w-[350px] h-[480px] text-md bg-white">
+      <CardHeader>
+        <CardTitle className="text-xl mt-2">{title}</CardTitle>
         
-        <img className=" object-cover content-center justify-center rounded-t-md " src={image} alt="imagen evento" />
-        <div className="br-red-100 p-3 justify-center bg-gradient-to-b from-red-200 to-gray-100 text-red-800 rounded-b-md  ">
-        <p className="mb-2 text-2xl font-semibold tracking-tight text-red-800 dark:text-white  merienda-h3
-        pt-4 justify-center text-center leading-10">{title}</p>
-        
-        <p className="mb-3 text-center font-normal text-gray-700 dark:text-gray-500 text-md italic pl-5 pr-5
-        tracking-tighter  overflow-hidden subtitulo">{description}</p>
-        <p className="mb-3 text-center italic font-bold text-red-700 dark:text-gray-500 text-md tracking-tighter">
-            {dateEv.toString()}</p>
-            <div className="mx-auto items-center justify-center text-center">
-                <button type="button" id="abre-modal-evento" name="abre-modal-evento" className="text-green-500 text-md
-                 italic  p-3 hover:text-red-800">Ver mas</button>
-            </div>
- 
-        <div className="justify-center text-center mx-auto mb-4">
-            
-            
-            <button  className="w-1/2  mt-4 bg-red-800 text-gray-200 text-md font-medium hover:text-red-800
-             hover:bg-gray-200 hover:border-2 hover:border-red-800 p-2 rounded-md merienda-h3 italic ">Reservar</button></div>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col gap-2  text-md">
+          <div className="object-contain rounded-md  h-[210px]">
+            <Image src={image} alt={title} className="rounded-md" width={330} height={200}/>
+          </div>
         </div>
-    </div> 
-        
-</div>
-    )
+        <div className="flex flex-col  justify-end mt-4">
+          <p className="mb-2 text-center italic font-bold text-red-700 dark:text-gray-500 text-md tracking-tighter">
+            {dateEv}
+          </p>
+          <CardDescription>{description}</CardDescription>
+          <div className="flex flex-inline justify-end gap-5 mt-4 pt-5 items-baseline content-baseline">
+          <div className="">
+            <button
+              type="button"
+              id="abre-modal-evento"
+              name="abre-modal-evento"
+              className="text-green-500 text-md
+                 italic  p-3 hover:text-red-800"
+            >
+              Ver mas
+            </button>
+          </div>
+
+          <div className="justify-end ">
+          <button className="inline-flex h-10 items-center justify-center rounded-md
+           bg-red-800 merienda-h3  px-5 font-medium text-neutral-50 transition active:scale-110 ">
+          
+              Reservar
+            </button>
+          </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 }
 
-export default Evento
+export default Evento;

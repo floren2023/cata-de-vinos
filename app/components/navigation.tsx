@@ -27,7 +27,7 @@ export function Navigation() {
   const isClient = "false";
 
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 start-0  z-50 sombra3 pl-10 pr-10 bitter">
+    <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 start-0  shadow-sm z-50  pl-10 pr-10 bitter">
       <div
         className="max-w-screen-7xl flex flex-row items-center justify-around
      mx-auto gap-6"

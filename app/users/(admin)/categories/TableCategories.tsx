@@ -1,8 +1,7 @@
 
 "use client"
-import React from 'react'  
+import React, { useState } from 'react'  
 import { category } from '@/app/types/all-types'
-import { useState } from "react";
 import { handleDeleteCategory } from './handle';
 type categories=category[]
 
@@ -10,7 +9,7 @@ type categories=category[]
 export default  function TableCategories({categories}:{categories:categories}) {
    
   const [currentPage, setCurrentPage] = useState(1);  
-  const [postsPerPage,setPostsPerPage]=useState(8)
+  const [postsPerPage]=useState(8)
   const lastPageIndex=currentPage*postsPerPage
   const firstPostIndex=lastPageIndex-postsPerPage
   const totalPosts=categories.length
@@ -22,7 +21,7 @@ export default  function TableCategories({categories}:{categories:categories}) {
 
     return (
       
-      <div className="m-auto  mt-10 w-full">
+      <div className="m-auto   w-full">
          <div className=" pl-10 ">
       <div className="relative overflow-x-auto shadow-md sm:rounded-mb  justify-start mb-4 p-3">
       <table

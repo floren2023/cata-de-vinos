@@ -61,9 +61,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
 }
 
   return (
-    <div className= "grid grid-cols-3 mx-auto mt-20 pt-10 pl-10" >
+    <div className= "grid grid-cols-3 mx-auto mt-10  pl-10" >
       <div>
-      <Card className="m-auto p-6  text-xl  mt-10 bg-red-100  ">
+      <Card className="m-auto p-6  text-xl   bg-red-100  ">
       < CardHeader>
       <CardTitle>
         Crea una categoria:
@@ -86,7 +86,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-red-800 font-bold hover:bg-red-700 ">Crear</Button>
+        <Button type="submit" className="bg-red-800 font-bold hover:bg-red-700 text-white ">Crear</Button>
       </form>
     </Form>
     </CardContent>
