@@ -1,5 +1,6 @@
 "use client"
 
+import { Label, TextInput } from 'flowbite-react'
 import { Card } from 'flowbite-react/components/Card'
 import React, { useState} from 'react'
 
@@ -17,23 +18,24 @@ export default function Login() {
  }
 
   return (
-    <div className='mt-20 pt-10 pb-10 '>
- <Card className="w-1/4  mx-auto ">
-      <h1 className='text-xl text-red-800 text-center'>Entrar en la cuenta</h1>
-
-      <form className="w-full flex flex-col p-3" onSubmit={(e)=>handleOnSubmit(e)}>
-        <div className='w-full'>
-          <div className="mb-2 ">
-            <label htmlFor="email1"  >Correo</label>
-          </div>
-          <input id="email1" type="email" placeholder="name@gmail.com" required  />
-        </div>
-        <div className='w-full mb-5'>
-          <div className="mb-2 ">
-            <label htmlFor="password1" >Contraseña</label>
-          </div>
-          <input id="password1" type="password" required />
-        </div >
+   <div className=" mt-20 pt-10 pb-10 ">
+      <Card className="w-1/4 mx-auto">
+         
+         <form className="mx-auto flex w-full flex-col gap-4">
+         <div className="  text-center
+         text-xl  text-red-800 font medium pb-5">Entrar en la cuenta</div>
+         <div>
+           <div className="mb-2 block">
+             <Label htmlFor="email2" value="Correo" />
+           </div>
+           <TextInput id="email2" type="email" placeholder="name@gmail.com" required shadow />
+         </div>
+         <div>
+           <div className="mb-2 block">
+             <Label htmlFor="password2" value="Contraseña" />
+           </div>
+           <TextInput id="password2" type="password" required shadow />
+         </div>
         <div className="w-full">
         <button type="submit" className='bg-red-900 hover:bg-red-800 p-3 rounded-lg text-white font-medium'>Entrar</button>
       </div>

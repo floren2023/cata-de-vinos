@@ -129,15 +129,15 @@ export default async function Blog() {
           </ul>
         </div>
         <div className="pt-3 ">
-          <a
-            href="/"
+          <Link
+            href="/forum"
             className="flex items-center p-2 text-white rounded-lg
                dark:text-white bg-red-900 hover:text-red-800 hover:bg-gray-100
      dark:hover:bg-gray-700 hover:border-2 border-red-900 pl-5"
           >
             <IoMdChatboxes className="" />
-            Chat
-          </a>
+            Forum (deja un comentario)
+          </Link>
         </div>
       </div>
     </div>

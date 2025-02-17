@@ -2,7 +2,7 @@
 
 import { db } from "../db/drizzle"
 import { eventTable } from "../db/schema"
-import { eq } from "drizzle-orm"
+import { eq,ilike } from "drizzle-orm"
  type Event={    
     title:string,
     description:string,
@@ -39,6 +39,13 @@ export const getEvent=async(id:number)=>{
     
     return data
 } 
+
+ export const getFilteredEvents=async({query}:{query?:string})=>{
+        const data=await db.select().from(eventTable)        
+        .where(ilike(eventTable.title,`%${query}%`))
+      return data
+     
+    }
 
 export const deleteEvent=async(id:number)=>{
     await db

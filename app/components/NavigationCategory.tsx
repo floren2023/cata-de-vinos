@@ -54,7 +54,7 @@ function NavigationCategory({ categories }: Props) {
   const [filter, setFilter] = useState({
     sort: "none",
   });
-  console.log(filter.sort);
+  
 
   useEffect(() => {
     if (!query && !selectedValue&&filter.sort==='none') {

@@ -21,14 +21,14 @@ export default function Header() {
             Degustación de vinos de colección e internacionales
           </div>
           <div className="mx-auto z-10 text-center justify-center mt-10">
-            <Link
-              href="/events"
-              className="rounded-md hover:bg-gray-100 hover:text-red-900  text-white border-2 cursor-pointer  
+          <Link
+              href="/events" className="group relative h-12 overflow-hidden   px-6 transition
+            rounded-md hover:bg-gray-100 hover:text-red-900  text-white border-2 cursor-pointer  
                  border-red-900 shadow-md bg-red-800 text-xl semibold pt-4  pl-6 pr-6 pb-4
-                 transition-ease-out hover:scale-110  uppercase tracking-wider font-[merienda]"
-            >
-              Reservar evento aqui
-            </Link>
+                 transition-ease-out hover:scale-110  uppercase tracking-wider font-[merienda]"><span className="relative">Reservar evento aqui</span>
+           <div className="animate-shine-infinite absolute inset-0 -top-[20px] flex h-[calc(100%+40px)] w-full justify-center blur-[12px]">
+            <div className="relative h-full w-8 bg-white/30"></div></div></Link>
+            
           </div>
         </div>
 

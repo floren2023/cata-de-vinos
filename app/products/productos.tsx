@@ -63,7 +63,8 @@ interface Props {
           <Product item={item} />
         </div>
       ))}
-    </div></div>
+    </div>
+    </div>
   );
 }
 
