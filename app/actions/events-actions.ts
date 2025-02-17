@@ -8,7 +8,9 @@ import { eq,ilike } from "drizzle-orm"
     description:string,
     image:string,
     dateEv:string,
-    dateAt:string
+    dateAt:string,
+    hora:string,
+    min:string
 }
 
 export const getEvents=async()=>{
@@ -24,7 +26,9 @@ export const addEvent=async(event:Event)=>{
     description:event.description,
      image:event.image,
      dateEv:event.dateEv,
-     dateAt:event.dateAt
+     dateAt:event.dateAt,
+     hora:event.hora,
+     min:event.min
     }
 
 

@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { GridEvent } from "./gridEvent";
 import { useState } from "react";
 
+
 type FormData = {
   title: string;
   description: string;  
@@ -17,7 +18,10 @@ type FormData = {
   image:File,
   dateEv: string;
   dateAt:string
+  hora:string,
+  min:string
 };
+
 
 
 /* const formSchema = z.object({
@@ -48,6 +52,7 @@ const date = new Date();
 const futureDate = date.getDate() + 3;
 date.setDate(futureDate);
 const defaultValue = date.toLocaleDateString('es-ES');
+
 
 
    const [pending, setPending] = useState<boolean>(false);
@@ -86,14 +91,14 @@ const defaultValue = date.toLocaleDateString('es-ES');
  */
   
     const onSubmit = async(values: FormData) => {       
-      
+     
       setPending(true)
       let res=''
      if(typeof file!=='undefined'){    
        res=await uploadImage(file)     
         setPending(false)
         setSlug(res)
-        console.log(res)
+        
          }
     // const { toast } = useToast()
     const formData = new FormData();
@@ -101,7 +106,9 @@ const defaultValue = date.toLocaleDateString('es-ES');
     formData.append("description", values.description);
     formData.append("imageUrl", res);
     formData.append("dateEv", values.dateEv);
-    formData.append("dateAt", values.dateAt);
+    formData.append("dateAt", data);
+    formData.append("hora", values.hora);
+    formData.append("min", values.min);
     console.log(formData)
     let message = await formSubmit(formData);
     alert(message.message);
@@ -117,7 +124,9 @@ const defaultValue = date.toLocaleDateString('es-ES');
         description: values.description.toString(),
         image: res,
         dateEv: values.dateEv.toString(),
-        dateAt: values.dateAt.toString(),
+        dateAt: data,
+        hora:values.hora.toString(),
+        min:values.min.toString()
       });
       reset()
     }
@@ -129,17 +138,18 @@ const defaultValue = date.toLocaleDateString('es-ES');
       files: FileList;
     };    
     setFile(target.files[0])
-    console.log(target.files[0])
+    
   };
+  
 
   return (
     <div className="grid grid-cols-3">
-    <div className=" border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4 ml-10 w-full h-[600px]">
-      <div className="text-xl  pb-5 text-center">Crea Evento:</div>
+    <div className=" border-2 border-gray-200 mt-10 rounded-lg sombra3 p-4 ml-5 w-full h-[600px]">
+      <div className="text-xl  pb-3 text-center">Crea Evento:</div>
       <div className="mx-auto p-5  text-md   ">
         <form
           onSubmit={handleSubmit(onSubmit)} method="post"
-          className="space-y-4 text-md flex flex-col gap-3"
+          className="space-y-3 text-md flex flex-col gap-4"
         >
   
           <div>
@@ -170,24 +180,35 @@ const defaultValue = date.toLocaleDateString('es-ES');
               id="image"
             />
           </div>
-          <div className="flex flex-inline gap-7">
+          <div className="flex flex-inline gap-4">
           <div>
             <label htmlFor="dateEv" className="block font-medium pb-1"> Data Evento</label>
-            {/* <Datepicker language="es-ES" labelTodayButton="Hoy" labelClearButton="Limpiar" />; */}
+            
+          
             <input type="date" {...register("dateEv", { required: "Data evento requerida" })} id="dateEv" 
             defaultValue={defaultValue}
-            required className="border p-2 rounded w-full"/>
-            {errors.dateEv && <p className="text-red-500">{errors.dateEv.message}</p>}
+            required className="border p-2 rounded w-full"/> 
+            {errors.dateEv && <p className="text-red-500">{errors.dateEv.message}</p>} 
           </div>
           <div>
-            <label htmlFor="dateAt" className="block font-medium pb-1"> Data Registro</label>
-            <input  {...register("dateAt")} id="dateAt"  value={ data} className="border p-2 rounded w-full"/>
+           
+            <div className="flex flex-inline">
+            <div className="flex flex-col">
+                 <label  htmlFor="hora" className="block font-medium pb-1"> Hora</label>
+                 <input  type="number" id="hora"  {...register("hora")} className="w-12 h-8 px-1 py-2 apearence-none border-2 border-gray-400 rounded-sm" defaultValue="1" min="0" max="24" step="1"/>
+              </div>
+              <span>:</span>
+              <div className="flex flex-col">
+                 <label  htmlFor="min" className="block font-medium pb-1" > Min</label>
+                  <input  type="number" id="min"  {...register("min")} className="w-12 h-8 px-1 py-2 apearence-none border-2 border-gray-400 rounded-sm" defaultValue="1" min="0" max="59" step="1"/>
+                  </div>
+            </div>
           </div>
+        
           </div>
-          
-          <button
+                    <button
             type="submit"
-            className="bg-red-800 text-white p-2 rounded"
+            className="bg-red-800 text-white font-bold p-2 rounded-md"
           >
             Crear
           </button>

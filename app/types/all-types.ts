@@ -9,7 +9,10 @@ export type event={
     description:string,
     image:string,
     dateEv:string,
-    dateAt:string
+    dateAt:string,
+    hora:string,
+    min:string
+
 }
 export type product={   
     id:number, 

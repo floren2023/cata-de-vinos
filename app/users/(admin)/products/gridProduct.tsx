@@ -43,7 +43,6 @@ export function GridProduct(props: Props) {
      hover:border-red-800 active:border-red-800 hover:bg-red-200 active:bg-red-200 active:text-red-800"  onClick={()=>setCurrentPage(currentPage>1?currentPage-1:currentPage)}>
         < GrFormPrevious/>
         </button>
-
         {
 
 pages.map((page,index)=>{
@@ -59,13 +58,14 @@ pages.map((page,index)=>{
    )
 })
 }
-
         <button className="border-2 border-gray-200 text-sm px-3
     py-1 bg-gray-100 shadow-md rounded-md hover:text-red-800
      hover:border-red-800 active:border-red-800 hover:bg-red-200 active:bg-red-200 active:text-red-800"  onClick={()=>setCurrentPage(currentPage==pages.length?currentPage:currentPage+1)}>
         <GrFormNext/>
         </button>
       </div>
+
+
       <div className="  grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
         {currentPosts.map((item, index) => {
           return (
@@ -75,13 +75,13 @@ pages.map((page,index)=>{
               key={index}
             >
               <CardHeader>
-                <CardTitle className="text-center text-md">
+                <CardTitle className="text-center text-xl">
                   {item.product.name}
                 </CardTitle>
                 <div className="text-green-700 text-md font-medium">
-                  <span className="italic text-gray-500 text-sm font-thin pr-2">
-                    Categoria:
+                  <span className="italic text-gray-500 text-sm  pr-2">  Categoria:
                   </span>
+                  
                   {item.category.name}
                 </div>
                 <div className=" justify-center mx-auto ">

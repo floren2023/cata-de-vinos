@@ -59,7 +59,9 @@ export const eventTable= pgTable("event", {
   description: text('description').notNull(),
   image: text('image').notNull(),     
   dateEv:date('dateEv').notNull(),
-  dateAt:date('dateAt').notNull() //publishing date
+  dateAt:date('dateAt').notNull(), //publishing date
+  hora:text('hora').notNull(),
+  min:text('min')
 },
 (table) => {
   return {

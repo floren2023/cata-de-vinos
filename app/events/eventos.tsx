@@ -56,7 +56,7 @@ function Eventos({events}: {events:event[]}) {
     return(
         <div key={item.id}>  
       <Evento image={item.image} title={item.title}
-      description={item.description} dateEv={item.dateEv}  /></div>
+      description={item.description} dateEv={item.dateEv} hora={item.hora} min={item.min}/></div>
     )}
   )}
    

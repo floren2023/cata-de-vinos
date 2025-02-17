@@ -100,7 +100,7 @@ export default function  FormProduct  ({products,categories}:{products:products,
             product:productNew,
             category:categoryNew
            }
-           console.log(prod)
+           
           products.push(prod)           
         }        
                  reset()
@@ -117,14 +117,14 @@ export default function  FormProduct  ({products,categories}:{products:products,
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-      <div className=' border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4 ml-10 w-full h-[600px]'>
-      <div className="text-xl  pb-5 text-center">Products</div>
+      <div className=' border-2 border-gray-200 mt-10 rounded-lg sombra4 p-4 ml-10 w-full h-[650px]'>
+      <div className="text-xl  pb-3 text-center">Productos</div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 p-4    "
+        className="space-y-4 p-4 flex flex-col gap-3   "
       >
         <div>
-          <label className="block font-semibold" htmlFor="name">
+          <label className="block font-semibold pb-1" htmlFor="name">
             Nombre producto:
           </label>
           <input
@@ -136,7 +136,7 @@ export default function  FormProduct  ({products,categories}:{products:products,
         </div>
 
         <div>
-          <label className="block font-semibold" htmlFor="description">
+          <label className="block font-semibold pb-1" htmlFor="description">
             Descripción:
           </label>
           <input
@@ -152,7 +152,8 @@ export default function  FormProduct  ({products,categories}:{products:products,
         </div>
 
         <div>
-          <label className="block font-semibold" htmlFor="imagen">
+          <div>
+          <label className="block font-semibold pb-1" htmlFor="imagen">
             Imagen producto:
           </label>
           <input
@@ -161,9 +162,10 @@ export default function  FormProduct  ({products,categories}:{products:products,
             {...register("imagen")}
             onChange={(e) => handleOnChange(e)}
             className="border p-2 rounded w-full"
-          />
+          /></div>
         </div>
-        <div>
+        <div className="flex flex-inline gap-5">
+          <div>
           <label className="block font-semibold" htmlFor="price">
             Precio:
           </label>
@@ -176,19 +178,22 @@ export default function  FormProduct  ({products,categories}:{products:products,
           {errors.price && (
             <p className="text-red-500">{errors.price.message}</p>
           )}
+
+          </div>
+         
               
-        </div>
+        
         <div className='flex flex-inline gap-2 items-center'>
         <input type="checkbox" id="instock" {...register("instock")}  className="w-4 h-4 text-red-600
          bg-gray-100 border-gray-300 rounded-sm focus:ring-red-500 dark:focus:ring-red-600
           dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
 
-        <label htmlFor="instock" >In Stock</label>
-       </div>
+        <label htmlFor="instock" className='font-semibold pl-2'>In Stock</label>
+       </div></div>
        <div>
-       <label htmlFor="categoryId">Elige categoria:</label>
+       <label htmlFor="categoryId" className='font-semibold pr-2'>Elige categoria:</label>
 
-<select name="categoryId" id="categoryId" {...register("categoryId")}>
+<select name="categoryId" id="categoryId" {...register("categoryId")} className='border-r border-gray-400 rounded-md'>
         
   {
     categories.map((category,id)=>{
@@ -202,9 +207,11 @@ export default function  FormProduct  ({products,categories}:{products:products,
 </select> 
 </div>
 <div>
-        <button type="submit" className="bg-red-800 text-white p-2 rounded">
-          Submit
-        </button>
+<button type="submit" className="relative h-12 overflow-hidden rounded bg-red-800
+px-5 py-2.5 text-white transition-all duration-300 hover:bg-red-700
+hover:ring-2 hover:ring-red-700 hover:ring-offset-2">
+  <span className="relative">Crear producto</span></button>
+        
         </div>
       </form>
     </div>

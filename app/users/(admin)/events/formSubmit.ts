@@ -13,6 +13,8 @@ export default async function formSubmit(data:FormData):Promise<FormState>{
      const image=data.get("imageUrl")
      const dateEv=data.get("dateEv")
      const dateAt=data.get("dateAt")
+     const hora=data.get("hora")
+     const min=data.get("min")
     if(!title||!description||!image){
         
         return{
@@ -27,7 +29,9 @@ export default async function formSubmit(data:FormData):Promise<FormState>{
             description:description.toString(),
             image:image.toString(),
             dateEv:dateEv.toString(),
-            dateAt:dateAt.toString()
+            dateAt:dateAt.toString(),
+            hora:hora.toString(),
+            min:min.toString()
         }
          
       await addEvent(newEvent)
