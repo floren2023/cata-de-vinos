@@ -109,7 +109,7 @@ export default  function TableEventos({events}:{events:events}) {
                   </td>
                   <td className="px-6 py-4">
                     <button
-                      onClick={()=>handleDeleteEvent(item.id)}
+                      
                       className="font-medium text-red-600
                    dark:text-red-500 hover:underline"
                     >

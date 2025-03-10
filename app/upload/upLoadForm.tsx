@@ -13,7 +13,7 @@ const handleSubmit=async(e:React.FormEvent)=>{
     e.preventDefault() 
     
   const formData=new FormData()
-  console.log(file)
+  
   formData.append("image",  file as Blob)
    const response=await fetch("/api/file",{
         method: "POST",

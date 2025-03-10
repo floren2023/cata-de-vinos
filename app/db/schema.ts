@@ -35,7 +35,18 @@ export const userTable = pgTable(  "user",
 export const usersRelations = relations(userTable, ({ many }) => ({
   rezerve: many(rezerveTable),
   forum: many(forumTable),
+  
 }));
+
+export const sessionTable = pgTable("session", {
+  sessionToken: text("sessionToken").primaryKey(),
+  userId: integer("userId")
+    .notNull()
+    .references(() => userTable.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date" }).notNull(),
+});
+
+ 
 
 export const categoryTable = pgTable("category", {
   id: serial("id").primaryKey(),
@@ -200,6 +211,7 @@ export const forumRelations = relations(forumTable, ({ one}) => ({
 
 export const schema = {
   user: userTable,
+  session:sessionTable,
   category: categoryTable,
   event:eventTable,
   product:productTable,

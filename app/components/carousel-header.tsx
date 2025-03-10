@@ -24,6 +24,7 @@ export default function CarouselHeader(){
         autoPlay={true}
         infiniteLoop={true}
         thumbWidth={500}
+        showThumbs={false}
         >
             {data.map((item,id)=>{
                 return(

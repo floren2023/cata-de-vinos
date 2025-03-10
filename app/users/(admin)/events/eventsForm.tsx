@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { event } from "@/app/types/all-types";
 import formSubmit from "./formSubmit";
@@ -9,6 +9,7 @@ import formSubmit from "./formSubmit";
 import { useToast } from "@/hooks/use-toast";
 import { GridEvent } from "./gridEvent";
 import { useState } from "react";
+
 
 
 type FormData = {
@@ -59,6 +60,7 @@ const defaultValue = date.toLocaleDateString('es-ES');
     const [file, setFile] = useState<File | undefined>(null);
     const[slug,setSlug]=useState<any>('')
   
+    
     const {
       register,
       handleSubmit,
@@ -69,7 +71,7 @@ const defaultValue = date.toLocaleDateString('es-ES');
     const uploadImage=async(file:File):Promise<string>=>{
       const form1Data=new FormData()  
     form1Data.append("image",  file as Blob)
-     const response=await fetch("/api/file/",{
+     const response=await fetch("/api/events/",{
           method: "POST",
           body:form1Data
     }) 
@@ -109,7 +111,7 @@ const defaultValue = date.toLocaleDateString('es-ES');
     formData.append("dateAt", data);
     formData.append("hora", values.hora);
     formData.append("min", values.min);
-    console.log(formData)
+    
     let message = await formSubmit(formData);
     alert(message.message);
     /*  const crear=message.message
@@ -129,6 +131,7 @@ const defaultValue = date.toLocaleDateString('es-ES');
         min:values.min.toString()
       });
       reset()
+     
     }
      
   }

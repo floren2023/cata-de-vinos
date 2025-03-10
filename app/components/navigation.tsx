@@ -168,7 +168,7 @@ export function Navigation() {
                     <li className="text-red-900 hover:text-red-900 ">
                       <Tooltip content="Register">
                         <button className="">
-                          <a href="/register">
+                          <a href="/signup">
                             <BiRegistered className="w-6 h-6 " />
                           </a>
                         </button>
@@ -215,6 +215,9 @@ export function Navigation() {
                 {/* <!-- no aparece en este navbar --> */}
                 <li className="text-red-900 hover:text-red-900 content-center align-baseline">
                   <Link href="/users/">Admin</Link>
+                </li>
+                <li className="text-red-900 hover:text-red-900 content-center align-baseline">
+                  <Link href="/users/client">Client</Link>
                 </li>
               
               </ul>

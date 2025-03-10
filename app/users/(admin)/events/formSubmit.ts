@@ -7,7 +7,7 @@ export type FormState={
 }
 
 export default async function formSubmit(data:FormData):Promise<FormState>{   
-      console.log(data)
+    
      const title=data.get("title")
      const description=data.get("description")
      const image=data.get("imageUrl")

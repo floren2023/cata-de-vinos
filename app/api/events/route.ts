@@ -11,7 +11,7 @@ export  async function POST(req:Request){
    
     if(!file.name)
         return NextResponse.json({error:"No existe archivo"},{status:400})
-    const fileWithPath=`products/${file.name}`
+    const fileWithPath=`events/${file.name}`
     
     const blob = await put(fileWithPath, file, {
         access: 'public',

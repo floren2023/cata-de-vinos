@@ -80,7 +80,7 @@ function NavigationCategory({ categories }: Props) {
   };
 
   return (
-    <div className="flex flex-inline p-3  mt-3 content-center items-center justify-between bg-gray-100  rounded-md sombra3 mx-auto pt-5">
+    <div className="flex flex-inline p-2   content-center items-center justify-between bg-gray-100  rounded-md sombra3 mx-auto ">
       <div className="text-red-800 italic text-xl merienda-h3   hidden lg:block pl-10">
         Disfruta de nuestros productos:
       </div>
