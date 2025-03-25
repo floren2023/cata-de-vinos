@@ -30,20 +30,24 @@ export async function decrypt(input: string | undefined = '') {
       return null
     }
 }
-export async function createSession(id:number){
+export async function createSession(id:string){
 
  const expiresAt=new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
-  const data = await db
-  .insert(sessionTable).values({userId:id, expiresAt})
-  // Return the session ID
-  .returning({ id: sessionTable.id })
+ 
+ // Return the session ID
+ 
 
-const sessionId = data[0].id
-  const session = await encrypt({ sessionId, expiresAt })
+//const sessionId = data[0].id
+  const session = await encrypt({ id, expiresAt })
+  if(session){
+    try{
+  const data = await db
+ .insert(sessionTable).values({sessionToken:session,userId:id,expiresAt: expiresAt})
+ .returning({ id: sessionTable.userId })
     const cookieStore = await cookies()
     
- 
+
   cookieStore.set('session', session, {
     httpOnly: true,
     secure: true,
@@ -51,12 +55,17 @@ const sessionId = data[0].id
     sameSite: 'lax',
     path: '/',
   })
+
+  }catch(error){
+    'Fail to create session'
+  }
+
 }
-   
+}
 
 
 
-export async function verifySession(){
+export  async function verifySession(){
     const cookie=(await cookies()).get(cookies.name)?.value
      const session=await decrypt(cookie)
      if(!session ?.userId){

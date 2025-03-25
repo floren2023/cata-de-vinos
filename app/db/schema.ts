@@ -18,12 +18,14 @@ export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
 
 export const userTable = pgTable(  "user",
   {
-    id: serial("id").primaryKey(),
+    id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
     name: text("name").notNull(),
     email: text("email").notNull().unique(),
     password: text("password"),    
     createdAt: timestamp("createdAt").defaultNow(),
-    role: rolesEnum().default("guest"),
+    role: rolesEnum("role").default("guest").notNull(),
   },
   (table) => {
     return {
@@ -40,7 +42,7 @@ export const usersRelations = relations(userTable, ({ many }) => ({
 
 export const sessionTable = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
-  userId: integer("userId")
+  userId: text("userId")
     .notNull()
     .references(() => userTable.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
@@ -116,8 +118,8 @@ export const productRelations = relations(
 
 export const favoriteTableEvents = pgTable("favorite_events", {
   id: serial('id').primaryKey(),
-  eventId: integer('eventId').notNull().references(()=>eventTable.id,{onDelete:"cascade"}),
-  userId:integer('userId').references(()=>userTable.id,{onDelete:"cascade"}),
+  eventId: text('eventId').notNull().references(()=>eventTable.id,{onDelete:"cascade"}),
+  userId:text('userId').references(()=>userTable.id,{onDelete:"cascade"}),
   likes:integer('likes').notNull(),
   dateFav:timestamp('dateFav').defaultNow()
 },
@@ -141,7 +143,7 @@ export const favorite_eventsRelations = relations(favoriteTableEvents, ({ one })
 export const favoriteTableProducts = pgTable("favorite_products", {
   id: serial('id').primaryKey(),
   productId: integer('productId').notNull().references(()=>productTable.id,{onDelete:"cascade"}),
-  userId:integer('userId').references(()=>userTable.id,{onDelete:"cascade"}),
+  userId:text('userId').references(()=>userTable.id,{onDelete:"cascade"}),
   likes:integer('likes').notNull(),
   dateFav:timestamp('dateFav').defaultNow()
 
@@ -165,7 +167,7 @@ export const favorite_productsRelations = relations(favoriteTableProducts, ({ on
 
 export const rezerveTable = pgTable("rezerve", {
   id:serial('id').primaryKey(),
-  userId: integer('userId').references(()=>userTable.id,{onDelete:"cascade"}),
+  userId: text('userId').references(()=>userTable.id,{onDelete:"cascade"}),
   eventId: integer('eventId').references(()=>eventTable.id,{onDelete:"cascade"}),  
   dateRez:timestamp('dateRez').defaultNow()
 },
@@ -190,7 +192,7 @@ export const rezerveTableRelations = relations(rezerveTable, ({ one }) => ({
 
 export const forumTable = pgTable("forum", {
   id:serial("id").primaryKey(),    
-  userId:integer('userId').references(()=>userTable.id,{onDelete:"cascade"}),
+  userId:text('userId').references(()=>userTable.id,{onDelete:"cascade"}),
   message:text('message').notNull(),
   dateEv:timestamp('dateEv').defaultNow()
 },

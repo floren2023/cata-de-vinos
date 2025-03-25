@@ -5,6 +5,7 @@ import { getUserByEmail } from "./app/actions/user-actions";
 import { redirect } from "next/navigation";
 
 export default{
+  
     providers:[
         Credentials({
             // You can specify which fields should be submitted, by adding keys to the `credentials` object.

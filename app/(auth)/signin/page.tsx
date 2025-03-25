@@ -6,7 +6,7 @@ import React, { useActionState} from 'react'
 import { signin } from './actions'
 
 
-export default function Login() {
+export default function signIn() {
   const [state, action, pending] = useActionState(signin, undefined)
 
  

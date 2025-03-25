@@ -4,7 +4,7 @@ import { db } from "../../db/drizzle"
 import { userTable,rolesEnum } from "../../db/schema"
 import { eq } from "drizzle-orm"
 import bcrypt from 'bcryptjs'
-import { createSession, deleteSession } from "@/app/_lib/session"
+import { createSession } from "@/app/_lib/session"
 import { redirect } from "next/navigation"
 
 type User={    
@@ -63,6 +63,6 @@ const hashedPassword = await bcrypt.hashSync(password, 10);
 
 
 export async function logout() {
-    deleteSession()
+    
     redirect('/login')
   }

@@ -1,0 +1,1 @@
+ALTER TABLE "favorite_events" ALTER COLUMN "eventId" SET DATA TYPE text;

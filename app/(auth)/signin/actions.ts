@@ -31,10 +31,10 @@ export async function signin(state,formData){
     const {email,password}=validationResult.data
      //verify session//verify email and password
      try{
-        await signIn("credentials",{email,password,redirectTo:("/")})
+        await signin("credentials",{email,password,redirectTo:("/")})
      }
      catch(error){
-        auth
+        
 
      }
    

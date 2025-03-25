@@ -7,7 +7,7 @@ import { useActionState } from 'react'
 import { signup } from "./actions";
  
 
-export default function SignUpForm() {
+export default function SignUp() {
   const [state, action, pending] = useActionState(signup, undefined)
   return (
     

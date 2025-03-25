@@ -51,7 +51,7 @@ export const addUser=async({name,email,password}:{name:string,email:string,passw
     }
 }
 
-export const deleteUser=async(id:number)=>{
+export const deleteUser=async(id:string)=>{
     await db
        .delete(userTable).where(eq(userTable.id,id))
        
