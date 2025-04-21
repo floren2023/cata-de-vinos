@@ -41,9 +41,7 @@ export default function CategoryForm({categories}:{categories:categories}) {
 })
 
 // 2. Define a submit handler.
-async function onSubmit(values: z.infer<typeof formSchema>) {
-
-  
+async function onSubmit(values: z.infer<typeof formSchema>) {  
  const formData=new FormData()
  formData.append("name",values.name)
  let message=await formSubmit(formData)

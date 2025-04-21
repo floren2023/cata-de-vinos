@@ -7,10 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate":"drizzle-kit generate",
-    "db:migrate":"drizzle-kit migrate",
-    "db:studio":"drizzle-kit studio"
-
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
@@ -52,6 +51,7 @@
     "next": "15.1.6",
     "next-auth": "^5.0.0-beta.25",
     "next-mdx-remote": "^5.0.0",
+    "node": "^20.19.0",
     "pg": "^8.13.3",
     "postgres": "^3.4.5",
     "react": "^16.8 || ^17.0 || ^18.0 || ^19.0",
@@ -61,11 +61,13 @@
     "react-multi-carousel": "^2.8.5",
     "react-range-slider-input": "^3.2.1",
     "react-responsive-carousel": "^3.2.23",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.4",
     "uuid": "^11.0.5",
-    "zod": "^3.24.1"
+    "valibot": "^1.0.0",
+    "zod": "^3.24.2"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0 || ^18.0 || ^19.0",
@@ -73,6 +75,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.17.17",
     "@types/pg": "^8.11.11",
     "@types/react-dom": "^19.0.3",

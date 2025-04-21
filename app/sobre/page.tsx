@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Card from "../components/card";
+import Card from "../_components/card";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.

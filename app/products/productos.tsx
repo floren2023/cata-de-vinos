@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { category, product } from "../types/all-types";
-import Product from "../components/Product";
+import Product from "../_components/Product";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 interface Props {

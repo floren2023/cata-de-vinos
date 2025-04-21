@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import {event} from '../types/all-types'
-import Evento from '../components/Evento'
+import Evento from '../_components/Evento'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
 

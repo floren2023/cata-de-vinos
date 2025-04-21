@@ -5,27 +5,21 @@ import { Search, AlignJustify } from "lucide-react";
 import SocialMedia from "./socialmedia";
 import { LuShoppingBasket } from "react-icons/lu";
 import { usePathname } from "next/navigation";
-import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
+import { RiLoginCircleLine } from "react-icons/ri";
 import { BiRegistered } from "react-icons/bi";
 import { Tooltip } from "flowbite-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+ 
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export function Navigation() {
   const pathname = usePathname();
-  /* localStorage.setItem("isClient",'false')
-  localStorage.setItem("isAdmin",'false')
-  const isAdmin=localStorage.getItem("isAdmin")
-  const isClient=localStorage.getItem("isClient")  */
-  const isAdmin = "false";
-  const isClient = "false";
-
+ 
+  
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 start-0  shadow-sm z-50  pl-10 pr-10 bitter">
       <div
@@ -38,7 +32,7 @@ export function Navigation() {
           </Link>
         </div>
         <div className="  lg:flex flex-inline ">
-          {isClient === "false" && (
+          
             <ul className="sm:hidden md:hidden  lg:flex lg:flex-inline md:text-sm lg:text-sm w-full  trecking-wider  gap-6 font-[merienda] font-medium">
               <li>
                 <Link
@@ -103,7 +97,7 @@ export function Navigation() {
                 </Link>
               </li>
             </ul>
-          )}
+          
           {/* { isClient==='true' &&
    <div className="flex flex-inline">
      <div className="relative sm:hidden md:block lg:block">
@@ -142,7 +136,7 @@ export function Navigation() {
             <div className="flex flex-inline gap-4 justify-end">       
                                     
                     <ul className="sm:hidden md:hidden lg:flex flex-inline gap-6 justify-end ">
-                    {isClient === "false" && isAdmin === "false" && (
+                  
                       <div className="flex flex-inline gap-5">
 
                         
@@ -168,7 +162,7 @@ export function Navigation() {
                     <li className="text-red-900 hover:text-red-900 ">
                       <Tooltip content="Register">
                         <button className="">
-                          <a href="/signup">
+                          <a href="/register">
                             <BiRegistered className="w-6 h-6 " />
                           </a>
                         </button>
@@ -184,21 +178,7 @@ export function Navigation() {
                       </Tooltip>
                     </li>
                   </div>
-                )}
-                {/*  {isAdmin==='true'||isClient==='true'&&
-         <li>
-              <form id="logout" name="logout">
-              <button 
-               
-                className="text-red-800 bg-white-800 hover:text-white hover:bg-red-800 p-1 pl-2 pr-2 border-2
-             border-red-800
-             rounded-2xl font-medium"
-                type="submit"
-              >
-                <RiLogoutCircleLine/>
-              </button></form> 
-            </li>
-} */}
+              
                 <li>
                   <Tooltip content="Carrito">
                     <button className="">
@@ -209,16 +189,8 @@ export function Navigation() {
                   </Tooltip>
                 </li>
 
-                {/* <!--  data-modal-target="authentication-modal"
-              data-modal-toggle="authentication-modal" --> */}
-
-                {/* <!-- no aparece en este navbar --> */}
-                <li className="text-red-900 hover:text-red-900 content-center align-baseline">
-                  <Link href="/users/">Admin</Link>
-                </li>
-                <li className="text-red-900 hover:text-red-900 content-center align-baseline">
-                  <Link href="/users/client">Client</Link>
-                </li>
+                
+               
               
               </ul>
               </div>
@@ -241,3 +213,4 @@ export function Navigation() {
     </nav>
   );
 }
+

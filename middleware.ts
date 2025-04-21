@@ -1,38 +1,19 @@
-import {NextResponse} from "next/server"
-import type {NextRequest} from "next/server"
-import { auth } from "./auth"
-import { cookies } from "next/headers"
-import { decrypt } from "./app/_lib/session"
+import NextAuth from "next-auth"
+import authConfig from "./auth.config"
+import {auth} from "./auth"
+//const {auth}=NextAuth(authConfig)
 
-const publicRoutes = ['/login', '/signup', '/','/testauth'] 
-const protectedRoutes=["/users/client","/users"]
+export default auth((req)=>{
+    const isLoggedIn=!!req.auth
+    console.log("Route:", req.nextUrl.pathname)
+    console.log("Is loggedIn:",isLoggedIn)
 
-export default async function middleware(req:NextRequest){
-    
-    const path = req.nextUrl.pathname
-    const isProtectedRoute = protectedRoutes.includes(path)
-    const isPublicRoute = publicRoutes.includes(path)
-    // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
-  // 4. Redirect to /login if the user is not authenticated
-  if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
-  }
-  // 5. Redirect to /dashboard if the user is authenticated
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith('/users/client')
-  ) {
-    return NextResponse.redirect(new URL('/users/client', req.nextUrl))
-  }
- 
-  return NextResponse.next()
-}
- 
-
-
+})
 export const config={
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+    matcher: [
+        // Skip Next.js internals and all static files, unless found in search params
+        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+        // Always run for API routes
+        '/(api|trpc)(.*)',
+      ],
 }

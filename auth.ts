@@ -1,26 +1,16 @@
 import NextAuth from "next-auth"
+
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
-import { db } from "../cata-de-vinos/app/db/drizzle"
-import Credentials from "next-auth/providers/credentials"
+import  {db}  from "./app/db/drizzle"
+import authConfig from "./auth.config";
+import { redirect } from 'next/navigation'
 
-export const nextAuth= NextAuth({  
-  session:{strategy:"jwt"},
-  secret:process.env.NEXTAUTH_SECRET,
-  pages:{signIn:"/(auth)/signin"},
-  providers:  [
-    Credentials ({
-     
-    authorize: async (credentials:{email, password} ) => {
-
-    }
-
-  })
-  ]
-  
-
-  
-
-  
+export const nextAuth=NextAuth({
+    adapter: DrizzleAdapter(db),
+    session:{strategy:"jwt"},
+    secret:process.env.AUTH_SECRET,
+    pages:{signIn: "/(auth)/login" }, 
+    
+   ...authConfig
 })
-
-
+export const { signIn, signOut, auth, handlers:{GET,POST} } = nextAuth;

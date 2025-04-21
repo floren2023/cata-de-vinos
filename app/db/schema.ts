@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations, SQL, sql } from "drizzle-orm";
 
 import {
   pgEnum,
@@ -12,6 +12,7 @@ import {
   real,
   index,
   date,
+  AnyPgColumn,
 } from "drizzle-orm/pg-core";
 
 export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
@@ -30,8 +31,8 @@ export const userTable = pgTable(  "user",
   (table) => {
     return {
       nameUserIdx: index("nameUser_idx").on(table.name),
-      emailIdx: uniqueIndex("email_idx").on(table.email),
-    };
+      emailIdx: uniqueIndex("email_idx").on(lower(table.email)),    
+    }
   });
   
 export const usersRelations = relations(userTable, ({ many }) => ({
@@ -39,6 +40,9 @@ export const usersRelations = relations(userTable, ({ many }) => ({
   forum: many(forumTable),
   
 }));
+export function lower(email: AnyPgColumn): SQL {
+  return sql`lower(${email})`;
+}
 
 export const sessionTable = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),

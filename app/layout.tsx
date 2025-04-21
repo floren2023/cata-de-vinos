@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Bitter,Merienda } from "next/font/google";
 import "./globals.css";
-import { Navigation } from "./components/navigation";
-import Footer from "./components/footer";
+import { Navigation } from "./_components/navigation";
+import Footer from "./_components/footer";
 import { Toaster } from "@/components/ui/toaster"
 
 
 export const metadata: Metadata = {
   title: "Cata de Vinos",
-  description: "Pagina generada con create next app",
+  description: "Pagina de cta de vinos",
 };
 
  const bitter = Bitter({variable: "--font-bitter-serif", subsets: ['latin'] })
@@ -24,8 +24,7 @@ export default function RootLayout({
       <body
         className={`${bitter.variable} ${merienda.variable} antialiased`}
       >
-        <Navigation/>
-        <Toaster/>
+       <Navigation />
         {children}
         <Footer/>
       </body>

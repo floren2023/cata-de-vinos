@@ -1,7 +1,7 @@
 
 import { getCategories } from '../actions/category-actions'
 import {  getCategoryProducts, getFilteredProducts, getPriceProducts, getProducts } from '../actions/products-actions'
-import NavigationCategory from '../components/NavigationCategory'
+import NavigationCategory from '../_components/NavigationCategory'
 import { category } from '../types/all-types'
 import Productos from './productos'
 

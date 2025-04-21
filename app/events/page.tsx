@@ -1,7 +1,7 @@
 
 import { getEvents, getFilteredEvents } from "../actions/events-actions";
-import HeaderEventos from "../components/HeaderEventos";
-import { NavigationEvent } from "../components/navigationEvent";
+import HeaderEventos from "../_components/HeaderEventos";
+import { NavigationEvent } from "../_components/navigationEvent";
 import Eventos from "./eventos";
 
 export  default async function Events(

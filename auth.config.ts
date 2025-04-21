@@ -1,48 +1,44 @@
-import bcrypt from "bcryptjs";
-import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import { getUserByEmail } from "./app/actions/user-actions";
-import { redirect } from "next/navigation";
 
-export default{
-  
-    providers:[
-        Credentials({
-            // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-            // e.g. domain, username, password, 2FA token, etc.
-            credentials: {
-              email: {},
-              password: {},
-            },
-            authorize: async (credentials:{email, password} ) => {
-              let user = null
-       
-              // logic to salt and hash password
-            const hashedPassword = await bcrypt.hashSync(credentials.password, 10);
-       
-              // logic to verify if the user exists
-              user = await getUserByEmail(credentials.email)
-              if(user){
-                //comprobar password
-                if(user.password===credentials.password){
-                  //entrar en la cuenta
-                  redirect('/client')
-                }else{
-                  throw new Error("Invalid credentials.")
-                }
-              }
-       
-              if (!user) {
-                // No user found, so this is their first attempt to login
-                // Optionally, this is also the place you could do a user registration
-                throw new Error("Invalid credentials.")
-              }
-       
-              // return user object with their profile data
-              return user
-            },
-          }),
-        ],
-      
+import Google  from "next-auth/providers/google";
+import  type {NextAuthConfig} from "next-auth"
+import Credentials from "next-auth/providers/credentials"
+import { LoginSchema } from "./app/schemas"
+import { getUserByEmail } from "./app/actions/user-actions"
+import bcrypt from "bcryptjs"
+
+export default {
+    providers :[ Google({}),
     
-} satisfies NextAuthConfig;
+        Credentials({
+            
+           async authorize(credentials){
+              const parsedCredentials=LoginSchema.safeParse(credentials)
+              if(parsedCredentials.success){
+                //carry out register
+               const {email,password}=parsedCredentials.data
+               console.log(email, password)
+                // look for your user in database
+                const user=await getUserByEmail(email)
+                if(!user){
+                    return null
+                }
+                else{
+                    
+
+                    const pass= user[0].password
+                    console.log(pass)
+                    const matchPass= await bcrypt.compare(parsedCredentials.data.password, pass)
+                   
+             if(matchPass) {
+              return user[0]
+             }
+             else{
+                return null
+             }
+           }
+        }}
+        })
+                
+    ]
+
+} satisfies NextAuthConfig
