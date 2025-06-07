@@ -15,12 +15,20 @@ export default async function Products( { searchParams
   } 
 }
 ){ 
-  const search=typeof searchParams.search==='string'?searchParams.search:undefined
+  const {search,category, price}=await searchParams;
+  /* const search=typeof searchParams.search==='string'?searchParams.search:undefined
   const category=typeof searchParams.category==='string'?searchParams.category:undefined
   const price=typeof searchParams.price==='string'?searchParams.price:undefined
-  
-
-
+   */
+if(typeof search!=='string'){
+  searchParams.search='undefined'
+}
+if(typeof category!=='string'){
+  searchParams.category='undefined'
+}
+if(typeof price!=='string'){
+  searchParams.price='undefined'
+}
     type categories=category[]
     const categories=await getCategories()
     let products=await getProducts()

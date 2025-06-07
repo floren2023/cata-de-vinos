@@ -19,22 +19,14 @@ export default function Product({ item }: { item:{product:product, category:cate
     <Card className=" bg-white  mb-4 rounded-lg sombra4
      border-red-100 transition hover:scale-105 
      border-2  dark:bg-gray-800 dark:border-gray-700">
-      <CardHeader className=" text-start pl-3 pt-3  justify-between">
+      <CardHeader className=" text-start justify-between flex flex-row">
         
         <div>
-          <FaHeart className="w-6 h-6 pl-0 text-red-600" />
+          <FaHeart className="w-6 h-6   ml-4 mt-4  text-red-600" />
         </div>
-        <div className="flex flex-inline justify-around">
-        <div className="text-md font-semibold tracking-tight text-gray-900 dark:text-white text-center 
-            pl-0 ml-0">
-            {prod.name}
-          </div>
-        <div className="text-md font-semibold text-gray-900 dark:text-white
-         text-end justify-end  ">
-          <p className="text-red-800 mr-2 text-md ">€<span className="pl-2">
-          {prod.price}</span></p>
+         <div className="text-yellow-400 text-xl">
+         *****
         </div>
-</div>
        
       </CardHeader>
       <CardContent>
@@ -46,12 +38,23 @@ export default function Product({ item }: { item:{product:product, category:cate
           />
         </div>
         <div className="justify-start flex flex-col pl-5 pt-3  ">
+        
+        <div className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-start 
+            pl-0 ml-0">
+            {prod.name}
+          </div>
+        <div className="text-md font-semibold text-gray-900 dark:text-white
+         text-end justify-end  ">
+          <p className="text-red-800 mr-2 text-xl ">€<span className="pl-2">
+          {prod.price}</span></p>
+        
+</div>
          
 
-          <div className="text-md tracking-tight text-red-900 dark:text-white  text-start">
+         {/*  <div className="text-md tracking-tight text-red-900 dark:text-white  text-start">
             {prod.description.substring(0,35)}
-          </div>
-          <div className="text-sm tracking-wide text-gray-600 font-bold italic  dark:text-white
+          </div> */}
+          <div className="text-sm tracking-wide text-green-500 font-medium italic pb-3 dark:text-white
            text-start  ">
             {category.name}
           </div>
@@ -61,7 +64,7 @@ export default function Product({ item }: { item:{product:product, category:cate
         
           <Button className="bg-red-800 text-gray-200  merienda hover:bg-gray-200
            hover:text-red-800 hover:border-2 hover:border-red-800 font-bold ">
-            <a href={`/products/${prod.id}`}>Ver</a></Button>
+            <a href={`/products/${prod.id}`}>Ver detalle</a></Button>
         
       </div>
       </CardContent>

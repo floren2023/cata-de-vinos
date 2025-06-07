@@ -7,7 +7,7 @@ import Image from "next/image"
 
 
 export default async function Product({params}:{params:{id:number}}){
-    const {id} =params;
+    const {id} =await params;
    
   const product=await getProduct(id)
 

@@ -1,14 +1,18 @@
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
 import {auth} from "./auth"
+import { Middleware } from "next/dist/lib/load-custom-routes"
 //const {auth}=NextAuth(authConfig)
 
-export default auth((req)=>{
+ export default auth((req)=>{
     const isLoggedIn=!!req.auth
     console.log("Route:", req.nextUrl.pathname)
     console.log("Is loggedIn:",isLoggedIn)
 
-})
+}) 
+
+
+
 export const config={
     matcher: [
         // Skip Next.js internals and all static files, unless found in search params
