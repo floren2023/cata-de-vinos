@@ -2,8 +2,10 @@ import Header from "./_components/header";
 import Testimonios from "./_components/testimonios";
 import Experiencias from "./_components/experiencias";
 
-export default function Home() {
-  return (
+
+export default async function Home() {
+  
+  return(
     <div className=" items-center justify-items-center min-h-screen bitter   ">
       <main className="flex flex-col gap-5 items-center  mt-5 mx-auto justify-center  z-20 pt-0 bg-gray-100">
         <Header />

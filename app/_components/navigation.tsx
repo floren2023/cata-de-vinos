@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Search, AlignJustify } from "lucide-react";
 
 import { LuShoppingBasket } from "react-icons/lu";
-import { usePathname } from "next/navigation";
+
 import { RiLoginCircleLine } from "react-icons/ri";
 import { Tooltip } from "flowbite-react";
 import {
